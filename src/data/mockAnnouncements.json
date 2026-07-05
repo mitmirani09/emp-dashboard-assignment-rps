@@ -1,0 +1,40 @@
+[
+  {
+    "id": "ann-1",
+    "title": "New Hybrid Workspace Guidelines & Schedule for Q3",
+    "content": "We are excited to launch our updated Q3 Workspace Guidelines. Starting next month, all employees are encouraged to utilize our newly renovated office hubs in New York and Austin at least two days per week. We have added new collaboration rooms, single occupancy quiet booths, and updated our high-speed printing hubs. Please check with your team leads to align on which days your engineering or marketing teams will meet in person to optimize collaboration. Free catered lunches will continue to be provided on Tuesdays and Thursdays at both office spaces. Safe travels!",
+    "category": "company",
+    "author": "Sarah Jenkins (VP of HR)",
+    "createdAt": "2026-07-04",
+    "imageUrl": "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80",
+    "importance": "high"
+  },
+  {
+    "id": "ann-2",
+    "title": "Updated Policy: Leave Rollover Limits and Year-End Sick Leave Rules",
+    "content": "Please note an important change regarding our annual time-off rollover policy. Starting this fiscal year, the maximum amount of unused Casual Leave that can be carried over into the next calendar year is capped at 5 working days. Any remaining balance beyond 5 days will lapse automatically on December 31st. Sick Leave balances will continue to reset to 10 days each year without rollover to encourage proper utilization when needed. We highly recommend reviewing your leave summary boards and planning your upcoming leaves in advance to avoid any end-of-year scheduling bottlenecks.",
+    "category": "policy",
+    "author": "Bob Williams (HR Manager)",
+    "createdAt": "2026-07-01",
+    "importance": "high"
+  },
+  {
+    "id": "ann-3",
+    "title": "Annual Summer Tech Picnic & Hackathon Sign-up Open!",
+    "content": "Get ready for our annual Summer Tech Picnic taking place on Friday, August 14th at Central Park. We will have food trucks, outdoor team games, and live music. In addition, the Hackathon committee is kickstarting signups for the 24-hour hackathon starting Thursday morning. The theme this year is \"AI-driven Productivity tools for Workspaces.\" Teams of up to 4 can register. There are amazing prizes for 1st, 2nd, and 3rd place, including high-end mechanical keyboards, tech vouchers, and executive lunches. Click the links on our intranet calendar page to register your team before July 31st!",
+    "category": "event",
+    "author": "Alice Johnson (Social Committee)",
+    "createdAt": "2026-06-28",
+    "imageUrl": "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=800&q=80",
+    "importance": "medium"
+  },
+  {
+    "id": "ann-4",
+    "title": "Quarterly Town Hall & Product Roadmap Showcase",
+    "content": "Join us for our Q2 Town Hall meeting on Wednesday, July 8th at 10:00 AM EST. Our executive team will share business metrics updates, user growth numbers, and our upcoming engineering objectives. We will also host a live 20-minute product showcase demonstrating the new client analytics dashboard that the team has been engineering. A calendar invite with the Zoom link has been sent to everyone. Q&A channel will open 15 minutes before the call on Slack.",
+    "category": "company",
+    "author": "Robert Chen (CEO)",
+    "createdAt": "2026-06-25",
+    "importance": "high"
+  }
+]

@@ -1,0 +1,51 @@
+{
+  "balances": [
+    { "type": "casual", "total": 12, "used": 7, "available": 5 },
+    { "type": "sick", "total": 10, "used": 2, "available": 8 },
+    { "type": "earned", "total": 20, "used": 8, "available": 12 }
+  ],
+  "requests": [
+    {
+      "id": "req-1",
+      "startDate": "2026-04-10",
+      "endDate": "2026-04-12",
+      "leaveType": "casual",
+      "reason": "Family trip over the weekend.",
+      "status": "approved",
+      "createdAt": "2026-04-01",
+      "approvedAt": "2026-04-03",
+      "approverComment": "Have a great time!"
+    },
+    {
+      "id": "req-2",
+      "startDate": "2026-05-02",
+      "endDate": "2026-05-02",
+      "leaveType": "sick",
+      "reason": "Dental checkup and extraction.",
+      "status": "approved",
+      "createdAt": "2026-05-01",
+      "approvedAt": "2026-05-01",
+      "approverComment": "Get well soon."
+    },
+    {
+      "id": "req-3",
+      "startDate": "2026-06-15",
+      "endDate": "2026-06-22",
+      "leaveType": "earned",
+      "reason": "Summer vacation trip.",
+      "status": "approved",
+      "createdAt": "2026-05-15",
+      "approvedAt": "2026-05-18",
+      "approverComment": "Enjoy your break!"
+    },
+    {
+      "id": "req-4",
+      "startDate": "2026-07-20",
+      "endDate": "2026-07-24",
+      "leaveType": "casual",
+      "reason": "Personal errands and family event.",
+      "status": "pending",
+      "createdAt": "2026-07-02"
+    }
+  ]
+}
