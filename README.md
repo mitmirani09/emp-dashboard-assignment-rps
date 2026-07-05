@@ -97,7 +97,16 @@ npx tsc --noEmit
 
 ---
 
+## 🤖 AI Tools Used
+
+This project was built and refined using state-of-the-art AI development utilities:
+- **Claude Code**: Used for project planning, detailed task breakdowns, and scoping implementation steps to guide the development workflow.
+- **Antigravity IDE**: Used for generating boilerplate code, initial workspace scaffolding, directory structuring, and UI skeleton code to get a head start.
+
+---
+
 ## 🛡️ Rationale, Assumptions & Trade-offs
+
 
 1. **LocalStorage Caching**: We assumed that the dashboard should persist session updates (punching in/out, leave requests, profile modifications) without requiring a backend database. We implemented standard JSON storage syncing on every state transition.
 2. **Mockaroo JSON Loading**: The application reads directly from JSON mock datasets inside `src/data/`. This makes it simple to replace the files with your own export profiles later.
