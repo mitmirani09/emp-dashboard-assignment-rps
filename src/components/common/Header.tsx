@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Bell, Menu, User, Settings, LogOut, ChevronDown, Sparkles } from 'lucide-react';
 import { useEmployee } from '../../context/EmployeeContext';
 import { ThemeToggle } from './ThemeToggle';
@@ -10,8 +10,8 @@ interface HeaderProps {
 
 export const Header: React.FC<HeaderProps> = ({ onToggleSidebar }) => {
   const { currentUser } = useEmployee();
-  const location = useLocation();
   const [showNotifications, setShowNotifications] = useState(false);
+
   const [showUserDropdown, setShowUserDropdown] = useState(false);
 
   const notificationsRef = useRef<HTMLDivElement>(null);

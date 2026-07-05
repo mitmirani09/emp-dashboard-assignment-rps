@@ -3,13 +3,13 @@ import {
   MessageSquare, 
   X, 
   Send, 
-  Sparkles, 
   Minus,
   Bot,
   ArrowRight
 } from 'lucide-react';
 import { useEmployee } from '../../context/EmployeeContext';
-import { Message } from '../../types';
+import type { Message } from '../../types';
+
 
 export const ChatAssistant: React.FC = () => {
   const { currentUser, leaveBalances, attendanceRecords } = useEmployee();

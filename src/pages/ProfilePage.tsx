@@ -9,16 +9,13 @@ import {
   ArrowLeft, 
   Edit3, 
   Check, 
-  X, 
-  Hierarchy,
-  Briefcase,
-  Users,
   Copy,
   ChevronRight
 } from 'lucide-react';
 import { useEmployee } from '../context/EmployeeContext';
-import { Employee } from '../types';
+
 import { toast } from 'sonner';
+
 
 export const ProfilePage: React.FC = () => {
   const navigate = useNavigate();

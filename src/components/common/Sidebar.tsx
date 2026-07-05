@@ -9,9 +9,9 @@ import {
   User,
   Settings,
   ChevronLeft,
-  ChevronRight,
-  Sparkles
+  ChevronRight
 } from 'lucide-react';
+
 
 interface SidebarProps {
   isOpen: boolean;

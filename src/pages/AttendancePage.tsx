@@ -10,18 +10,16 @@ import {
   Cell
 } from 'recharts';
 import { 
-  Calendar as CalendarIcon, 
   CheckCircle, 
   AlertTriangle, 
   XCircle, 
   ChevronLeft, 
   ChevronRight, 
   ArrowUpDown,
-  Search,
-  Filter
+  Clock
 } from 'lucide-react';
 import { useEmployee } from '../context/EmployeeContext';
-import { AttendanceRecord } from '../types';
+
 
 export const AttendancePage: React.FC = () => {
   const { attendanceRecords } = useEmployee();
@@ -77,21 +75,23 @@ export const AttendancePage: React.FC = () => {
     };
   }, [attendanceRecords]);
 
+  // Helper for actual present count
+  const presentCount = useMemo(() => {
+    return attendanceRecords.filter(
+      r => r.date.startsWith('2026-07') && (r.status === 'present' || r.status === 'late')
+    ).length;
+  }, [attendanceRecords]);
+
   // Recharts Chart Data (last 6 months trend)
-  const chartData = [
+  const chartData = useMemo(() => [
     { name: 'Jan', days: 20 },
     { name: 'Feb', days: 19 },
     { name: 'Mar', days: 22 },
     { name: 'Apr', days: 21 },
     { name: 'May', days: 18 },
     { name: 'Jun', days: 20 },
-    { name: 'Jul', days: presentCount + lateCount }
-  ];
-
-  // Helper for actual present count
-  const presentCount = attendanceRecords.filter(
-    r => r.date.startsWith('2026-07') && (r.status === 'present' || r.status === 'late')
-  ).length;
+    { name: 'Jul', days: presentCount }
+  ], [presentCount]);
 
   // Generate calendar heatmap days for selected month (June/July 2026)
   const heatmapDays = useMemo(() => {
@@ -113,7 +113,7 @@ export const AttendancePage: React.FC = () => {
       const checkDayOfWeek = new Date(selectedYear, selectedMonth, day).getDay();
       const isWeekend = checkDayOfWeek === 0 || checkDayOfWeek === 6;
 
-      let status: 'present' | 'absent' | 'late' | 'weekend' | 'unlogged' = 'unlogged';
+      let status: 'present' | 'absent' | 'late' | 'early-leave' | 'weekend' | 'unlogged' = 'unlogged';
       if (record) {
         status = record.status;
       } else if (isWeekend) {
@@ -121,6 +121,7 @@ export const AttendancePage: React.FC = () => {
       }
 
       days.push({
+
         dayNum: day,
         status,
         dateStr,
@@ -246,13 +247,14 @@ export const AttendancePage: React.FC = () => {
                   }}
                 />
                 <Bar dataKey="days" radius={[4, 4, 0, 0]}>
-                  {chartData.map((entry, index) => (
+                  {chartData.map((_, index) => (
                     <Cell 
                       key={`cell-${index}`} 
                       fill={index === chartData.length - 1 ? '#8b5cf6' : '#3b82f6'} 
                     />
                   ))}
                 </Bar>
+
               </BarChart>
             </ResponsiveContainer>
           </div>

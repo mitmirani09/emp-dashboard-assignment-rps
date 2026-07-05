@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { Employee, AttendanceRecord, LeaveBalance, LeaveRequest, Announcement } from '../types';
+import type { Employee, AttendanceRecord, LeaveBalance, LeaveRequest, Announcement } from '../types';
+
 import mockEmployees from '../data/mockEmployees.json';
 import mockLeaves from '../data/mockLeaves.json';
 import mockAttendanceRecords from '../data/mockAttendance.json';

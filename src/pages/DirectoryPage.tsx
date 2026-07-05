@@ -9,12 +9,10 @@ import {
   MapPin, 
   X, 
   Users, 
-  UserCheck, 
   Filter,
   RefreshCw
 } from 'lucide-react';
 import { useEmployee } from '../context/EmployeeContext';
-import { Employee } from '../types';
 
 export const DirectoryPage: React.FC = () => {
   const navigate = useNavigate();

@@ -1,9 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { 
-  Megaphone, 
   Sparkles, 
-  ChevronDown, 
-  ChevronUp, 
   Calendar, 
   User, 
   Search,
@@ -11,7 +8,9 @@ import {
   ArrowUpDown
 } from 'lucide-react';
 import { useEmployee } from '../context/EmployeeContext';
-import { Announcement } from '../types';
+import type { Announcement } from '../types';
+
+
 
 export const AnnouncementsPage: React.FC = () => {
   const { announcements } = useEmployee();
@@ -169,7 +168,7 @@ export const AnnouncementsPage: React.FC = () => {
           const isExpanded = expandedCards[ann.id] || false;
           const isSummaryVisible = visibleSummaries[ann.id] || false;
           const isSummaryLoading = loadingSummaries[ann.id] || false;
-          const hasSummaryLoaded = !!aiSummaries[ann.id];
+
 
           return (
             <article 

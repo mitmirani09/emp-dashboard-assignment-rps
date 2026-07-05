@@ -6,7 +6,6 @@ import {
   Pie, 
   Cell, 
   ResponsiveContainer, 
-  Legend, 
   Tooltip 
 } from 'recharts';
 import { 
@@ -14,15 +13,12 @@ import {
   X, 
   AlertCircle, 
   CheckCircle2, 
-  CalendarDays,
-  FileText,
-  Clock,
-  Trash2,
-  Calendar as LucideCalendar
+  Calendar as CalendarIcon
 } from 'lucide-react';
 import { useEmployee } from '../context/EmployeeContext';
-import { LeaveRequest } from '../types';
 import { toast } from 'sonner';
+
+
 
 export const LeavesPage: React.FC = () => {
   const { 
@@ -286,7 +282,8 @@ export const LeavesPage: React.FC = () => {
         {/* Leave blocker Calendar */}
         <div className="lg:col-span-2 bg-white dark:bg-slate-800 rounded-2xl border border-gray-100 dark:border-slate-700 p-5 space-y-4">
           <div className="flex items-center gap-2">
-            <LucideCalendar className="w-5 h-5 text-indigo-500" />
+            <CalendarIcon className="w-5 h-5 text-indigo-500" />
+
             <h2 className="font-bold text-base text-gray-900 dark:text-white">Leave Calendar</h2>
           </div>
           <p className="text-xs text-gray-400">Highlighted blocks indicate dates with approved leaves.</p>
@@ -391,7 +388,8 @@ export const LeavesPage: React.FC = () => {
             {/* Header */}
             <div className="flex justify-between items-center p-5 border-b border-gray-150 dark:border-slate-700">
               <div className="flex items-center gap-2">
-                <LucideCalendar className="w-5 h-5 text-blue-500" />
+                <CalendarIcon className="w-5 h-5 text-blue-500" />
+
                 <h3 className="font-bold text-base text-gray-900 dark:text-white">Request Time Off</h3>
               </div>
               <button 
