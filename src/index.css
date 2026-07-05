@@ -170,3 +170,10 @@ body {
   color: #475569 !important;
 }
 
+/* Force dark mode styling on native HTML select dropdown options */
+.dark select option {
+  background-color: #1e293b !important;
+  color: #f1f5f9 !important;
+}
+
+

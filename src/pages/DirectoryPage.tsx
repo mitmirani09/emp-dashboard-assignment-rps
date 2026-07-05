@@ -69,11 +69,16 @@ export const DirectoryPage: React.FC = () => {
   // Color code based on department
   const getDeptColor = (dept: string) => {
     const d = dept.toLowerCase();
-    if (d === 'engineering') return 'bg-blue-50 text-blue-600 dark:bg-blue-950/20 dark:text-blue-400';
-    if (d === 'design') return 'bg-purple-50 text-purple-600 dark:bg-purple-950/20 dark:text-purple-400';
-    if (d === 'hr') return 'bg-rose-50 text-rose-600 dark:bg-rose-950/20 dark:text-rose-405';
-    return 'bg-gray-50 text-gray-600 dark:bg-slate-800 dark:text-slate-400';
+    if (d.includes('eng')) return 'bg-blue-50 text-blue-600 dark:bg-blue-950/30 dark:text-blue-400';
+    if (d.includes('design')) return 'bg-purple-50 text-purple-600 dark:bg-purple-950/30 dark:text-purple-400';
+    if (d.includes('hr') || d.includes('people')) return 'bg-rose-50 text-rose-600 dark:bg-rose-950/30 dark:text-rose-400';
+    if (d.includes('product')) return 'bg-emerald-50 text-emerald-600 dark:bg-emerald-950/30 dark:text-emerald-400';
+    if (d.includes('market') || d.includes('sales')) return 'bg-pink-50 text-pink-600 dark:bg-pink-950/30 dark:text-pink-400';
+    if (d.includes('op')) return 'bg-teal-50 text-teal-600 dark:bg-teal-950/30 dark:text-teal-400';
+    if (d.includes('finance')) return 'bg-amber-50 text-amber-600 dark:bg-amber-950/30 dark:text-amber-400';
+    return 'bg-slate-50 text-slate-600 dark:bg-slate-800/80 dark:text-slate-350';
   };
+
 
   return (
     <div className="space-y-6">

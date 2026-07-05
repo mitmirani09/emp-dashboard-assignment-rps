@@ -9,7 +9,8 @@ import {
   User,
   Settings,
   ChevronLeft,
-  ChevronRight
+  ChevronRight,
+  X
 } from 'lucide-react';
 
 
@@ -49,15 +50,31 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
       {/* Sidebar Container */}
       <aside
-        className={`fixed md:sticky top-16 md:top-16 bottom-0 left-0 z-40 h-[calc(100vh-64px)] border-r transition-all duration-300 flex flex-col justify-between
+        className={`fixed md:sticky top-0 md:top-16 bottom-0 left-0 z-40 h-full md:h-[calc(100vh-64px)] border-r transition-all duration-300 flex flex-col justify-between
           bg-white border-gray-200 text-gray-700
           dark:bg-slate-900 dark:border-slate-800 dark:text-slate-350
           ${sidebarWidthClass}
           ${isOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}
         `}
       >
+        {/* Mobile Header with brand logo & close button */}
+        <div className="flex md:hidden justify-between items-center px-4 py-4 border-b border-gray-150 dark:border-slate-800">
+          <div className="flex items-center gap-2">
+            <span className="w-6 h-6 rounded-lg bg-blue-600 flex items-center justify-center text-white text-[11px] font-black font-mono">Co</span>
+            <span className="font-extrabold text-sm text-gray-900 dark:text-white">CoPortal</span>
+          </div>
+          <button 
+            onClick={onClose}
+            className="p-1 hover:bg-gray-100 dark:hover:bg-slate-800 text-gray-400 hover:text-gray-600 dark:hover:text-white rounded-lg transition-colors cursor-pointer"
+            aria-label="Close sidebar"
+          >
+            <X className="w-5 h-5" />
+          </button>
+        </div>
+
         {/* Navigation Section */}
         <div className="flex-1 py-4 overflow-y-auto px-3 space-y-1">
+
           {navItems.map(item => (
             <NavLink
               key={item.path}

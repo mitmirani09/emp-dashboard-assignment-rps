@@ -33,7 +33,7 @@ useEffect(() => {
     const diff = new Date().getTime() - new Date(activePunchInTime).getTime();
     const hrs = Math.floor(diff / 3600000).toString().padStart(2, '0');
     const mins = Math.floor((diff % 3600000) / 60000).toString().padStart(2, '0');
-    const secs = Math.floor((diff % 60005) / 1000).toString().padStart(2, '0');
+    const secs = Math.floor((diff % 60000) / 1000).toString().padStart(2, '0');
     setElapsedTimeStr(`${hrs}h ${mins}m ${secs}s`);
   };
   updateTimer();
@@ -46,37 +46,25 @@ useEffect(() => {
 **Answer**:
 We iterate over the approved leave requests list, generating a map of day strings (`"YYYY-MM-DD"`) for every date spanning start and end bounds. We supply this map to the `tileClassName` prop in `react-calendar`, applying custom background classes (e.g. `bg-blue-500/20`) to highlight them. When a user tries to book a leave via the form, we compare the input start and end dates with existing leaves in the map, raising validation errors if there is a overlap.
 
+### Q6: How does the "Switch Profile" feature update the dashboard dynamically?
+**Answer**:
+We restructure the JSON databases using `employeeId` references. In `EmployeeContext.tsx`, we query these databases using React `useMemo` hooks filtered by `currentUser.id`. When `switchUser(employeeId)` is called, it triggers a state update on `currentUser`. The memoized lists automatically recompute, causing all page components (such as stats cards, Recharts plots, calendar highlights, and table logs) to re-render with the switched user's data.
+
 ---
 
-## 🤖 AI Integration Questions
+## 🤖 AI & Theme Integration Questions
 
-### Q6: How does the AI HR Chat Assistant answer contextually?
+### Q7: How does the AI HR Chat Assistant answer contextually using Gemini REST API?
 **Answer**:
-We pass the global state (`currentUser`, `leaveBalances`, `attendanceRecords`) directly down to the `ChatAssistant`. When the user types, a matching script parses keywords (e.g., "sick leave", "manager", "attendance") and injects state values directly into the reply:
+We pass the active profile state down to the `ChatAssistant` component. We compile this context into a system prompt containing the worker's name, role, department, reporting manager, remaining leave categories, and attendance logs. We then make a direct `fetch` POST call to Google's Gemini 1.5 Flash REST API:
+`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`
 
-```tsx
-const generateBotResponse = (text: string): string => {
-  const query = text.toLowerCase();
-  if (query.includes('leave balance')) {
-    const casual = leaveBalances.find(b => b.type === 'casual')?.available || 0;
-    const sick = leaveBalances.find(b => b.type === 'sick')?.available || 0;
-    return `Your available balances are Casual: ${casual} and Sick: ${sick}.`;
-  }
-  // ... fallback response
-};
+This allows the model to answer HR queries based on actual user data.
+
+### Q8: How did you fix class-based dark mode toggling in Tailwind v4?
+**Answer**:
+By default, Tailwind v4 compiles its dark variants matching media queries (`prefers-color-scheme: dark`). To enable class-based switches (`.dark` class on the `html` element), we added the custom variant selector to our main stylesheet:
+```css
+@variant dark (&:where(.dark, .dark *));
 ```
-For a production deployment, this local matcher acts as a fallback while the main interface calls a Vercel AI SDK route stream (`import { generateText } from 'ai'`) linked to a Groq model (`mixtral-8x7b-32768`).
-
-### Q7: How did you implement the AI Announcement Summarizer?
-**Answer**:
-Each announcement card features an "AI Summary" toggle. When clicked, it displays a loading skeleton, waits for 1 second to simulate model inference delay, and displays a pre-calculated 1–2 sentence summary of that specific post. If the user overrides the mock data, the bot defaults to extracting the first two sentences programmatically. This ensures the demo functions smoothly in any environment.
-
----
-
-## ⚡ Performance & Optimization Questions
-
-### Q8: How did you optimize loading speeds and layout shifts?
-**Answer**:
-1. **Shimmer Skeletons**: We built animated shimmer skeleton components that match the exact aspect-ratio of directory cards, tables, and charts. These placeholders prevent Cumulative Layout Shift (CLS) as data loads.
-2. **Debounced Filters**: When searching the coworker list, search query changes are processed via React `useMemo` hooks, keeping the re-rendering of cards extremely efficient.
-3. **Data caching**: Global profiles and attendance logs are read from `localStorage` on init, avoiding data fetching delays.
+We also added CSS overrides for `react-calendar` text colors to guarantee high-contrast readability when the theme is toggled.

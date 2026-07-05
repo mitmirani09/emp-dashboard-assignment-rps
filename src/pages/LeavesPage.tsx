@@ -101,9 +101,10 @@ export const LeavesPage: React.FC = () => {
     const dateStr = date.toISOString().split('T')[0];
     const match = approvedLeaveDates[dateStr];
     if (match) {
-      if (match.type === 'casual') return 'bg-blue-500/20 text-blue-700 font-bold border-l-4 border-blue-500';
-      if (match.type === 'sick') return 'bg-emerald-500/20 text-emerald-700 font-bold border-l-4 border-emerald-500';
-      if (match.type === 'earned') return 'bg-purple-500/20 text-purple-700 font-bold border-l-4 border-purple-500';
+      if (match.type === 'casual') return 'bg-blue-500/20 text-blue-700 dark:text-blue-300 font-bold border-l-4 border-blue-500';
+      if (match.type === 'sick') return 'bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 font-bold border-l-4 border-emerald-500';
+      if (match.type === 'earned') return 'bg-purple-500/20 text-purple-700 dark:text-purple-300 font-bold border-l-4 border-purple-500';
+
     }
     return null;
   };
