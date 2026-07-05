@@ -1,18 +1,18 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import Calendar from 'react-calendar';
-import { 
-  PieChart, 
-  Pie, 
-  Cell, 
-  ResponsiveContainer, 
-  Tooltip 
+import {
+  PieChart,
+  Pie,
+  Cell,
+  ResponsiveContainer,
+  Tooltip
 } from 'recharts';
-import { 
-  Plus, 
-  X, 
-  AlertCircle, 
-  CheckCircle2, 
+import {
+  Plus,
+  X,
+  AlertCircle,
+  CheckCircle2,
   Calendar as CalendarIcon
 } from 'lucide-react';
 import { useEmployee } from '../context/EmployeeContext';
@@ -21,10 +21,10 @@ import { toast } from 'sonner';
 
 
 export const LeavesPage: React.FC = () => {
-  const { 
-    leaveBalances, 
-    leaveRequests, 
-    submitLeaveRequest 
+  const {
+    leaveBalances,
+    leaveRequests,
+    submitLeaveRequest
   } = useEmployee();
 
   const [searchParams, setSearchParams] = useSearchParams();
@@ -54,7 +54,7 @@ export const LeavesPage: React.FC = () => {
     const start = new Date(startDate);
     const end = new Date(endDate);
     if (end < start) return 0;
-    
+
     const diffTime = Math.abs(end.getTime() - start.getTime());
     return Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1;
   }, [startDate, endDate]);
@@ -158,7 +158,7 @@ export const LeavesPage: React.FC = () => {
 
   return (
     <div className="space-y-6 md:space-y-8">
-      
+
       {/* Header bar */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
@@ -180,23 +180,23 @@ export const LeavesPage: React.FC = () => {
 
       {/* 1. Leaves Summary & Pie Chart Layout */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        
+
         {/* Progress bar cards */}
         <div className="lg:col-span-2 space-y-4">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {leaveBalances.map((bal) => {
-              const themeColor = 
+              const themeColor =
                 bal.type === 'casual' ? 'text-blue-500 border-blue-500' :
-                bal.type === 'sick' ? 'text-emerald-500 border-emerald-500' : 'text-purple-500 border-purple-500';
+                  bal.type === 'sick' ? 'text-emerald-500 border-emerald-500' : 'text-purple-500 border-purple-500';
               const bgBadge =
                 bal.type === 'casual' ? 'bg-blue-50 dark:bg-blue-950/20' :
-                bal.type === 'sick' ? 'bg-emerald-50 dark:bg-emerald-950/20' : 'bg-purple-50 dark:bg-purple-950/20';
+                  bal.type === 'sick' ? 'bg-emerald-50 dark:bg-emerald-950/20' : 'bg-purple-50 dark:bg-purple-950/20';
 
               const percent = Math.round((bal.used / bal.total) * 100);
 
               return (
-                <div 
-                  key={bal.type} 
+                <div
+                  key={bal.type}
                   className={`bg-white dark:bg-slate-800 p-5 rounded-2xl border border-gray-100 dark:border-slate-700 flex flex-col justify-between min-h-[150px] relative overflow-hidden`}
                 >
                   <div className="flex justify-between items-start">
@@ -209,9 +209,9 @@ export const LeavesPage: React.FC = () => {
                   </div>
                   <div>
                     <h3 className="text-3xl font-black text-gray-900 dark:text-white mt-4">{bal.used}/{bal.total}</h3>
-                    <p className="text-[10px] text-gray-450 dark:text-slate-450 mt-1">Days Used</p>
+                    <p className="text-[10px] text-gray-450 dark:text-slate-400 mt-1">Days Used</p>
                     <div className="w-full h-1.5 bg-gray-100 dark:bg-slate-700 rounded-full mt-3 overflow-hidden">
-                      <div 
+                      <div
                         className={`h-full rounded-full transition-all duration-500
                           ${bal.type === 'casual' ? 'bg-blue-500' : bal.type === 'sick' ? 'bg-emerald-500' : 'bg-purple-500'}`}
                         style={{ width: `${percent}%` }}
@@ -257,7 +257,7 @@ export const LeavesPage: React.FC = () => {
                     <Cell key={`cell-${index}`} fill={entry.color} />
                   ))}
                 </Pie>
-                <Tooltip 
+                <Tooltip
                   contentStyle={{
                     backgroundColor: 'rgba(15, 23, 42, 0.95)',
                     border: 'none',
@@ -279,7 +279,7 @@ export const LeavesPage: React.FC = () => {
 
       {/* 2. Interactive Calendar & Sidebar Log */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        
+
         {/* Leave blocker Calendar */}
         <div className="lg:col-span-2 bg-white dark:bg-slate-800 rounded-2xl border border-gray-100 dark:border-slate-700 p-5 space-y-4">
           <div className="flex items-center gap-2">
@@ -302,7 +302,7 @@ export const LeavesPage: React.FC = () => {
           <div>
             <h2 className="font-bold text-base text-gray-900 dark:text-white">Calendar Key</h2>
             <p className="text-xs text-gray-400 mt-1">Status indications displayed on calendar tiles.</p>
-            
+
             <div className="mt-6 space-y-4">
               <div className="flex items-center gap-3 p-3 rounded-xl bg-blue-50/50 dark:bg-blue-900/10 border border-blue-150/20">
                 <div className="w-4 h-4 rounded bg-blue-500" />
@@ -327,7 +327,7 @@ export const LeavesPage: React.FC = () => {
               </div>
             </div>
           </div>
-          
+
           <div className="text-[10px] text-gray-400 border-t border-gray-100 dark:border-slate-700/50 pt-4 mt-6">
             Hover over calendar tile highlights to view the assigned employee details block.
           </div>
@@ -344,7 +344,7 @@ export const LeavesPage: React.FC = () => {
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse text-xs">
             <thead>
-              <tr className="border-b border-gray-200 dark:border-slate-700 text-gray-400 bg-gray-50/50 dark:bg-slate-850/50 font-bold uppercase tracking-wider">
+              <tr className="border-b border-gray-200 dark:border-slate-700 text-gray-400 bg-gray-50/50 dark:bg-slate-500/75 dark:text-white font-bold uppercase tracking-wider">
                 <th className="p-4 pl-6">Leave Type</th>
                 <th className="p-4">Duration Range</th>
                 <th className="p-4">Submission Reason</th>
@@ -354,11 +354,11 @@ export const LeavesPage: React.FC = () => {
             </thead>
             <tbody className="divide-y divide-gray-150 dark:divide-slate-700 text-gray-700 dark:text-slate-300">
               {leaveRequests.map((req) => (
-                <tr key={req.id} className="hover:bg-gray-50/50 dark:hover:bg-slate-850/50 transition-colors">
+                <tr key={req.id} className="hover:bg-gray-50/50 dark:hover:bg-slate-500/50 transition-colors">
                   <td className="p-4 pl-6">
                     <span className="capitalize font-semibold text-gray-900 dark:text-white">{req.leaveType}</span>
                   </td>
-                  <td className="p-4 font-mono font-medium text-gray-600 dark:text-slate-400">
+                  <td className="p-4 font-mono font-medium text-gray-600 dark:text-gray-400">
                     {req.startDate} to {req.endDate}
                   </td>
                   <td className="p-4 max-w-xs truncate" title={req.reason}>
@@ -385,7 +385,7 @@ export const LeavesPage: React.FC = () => {
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/55 backdrop-blur-sm transition-opacity animate-in fade-in duration-200">
           <div className="bg-white dark:bg-slate-800 w-full max-w-md rounded-2xl border border-gray-100 dark:border-slate-700 shadow-2xl overflow-hidden transform transition-all scale-100 animate-in zoom-in-95 duration-200">
-            
+
             {/* Header */}
             <div className="flex justify-between items-center p-5 border-b border-gray-150 dark:border-slate-700">
               <div className="flex items-center gap-2">
@@ -393,7 +393,7 @@ export const LeavesPage: React.FC = () => {
 
                 <h3 className="font-bold text-base text-gray-900 dark:text-white">Request Time Off</h3>
               </div>
-              <button 
+              <button
                 onClick={() => { setIsModalOpen(false); setFormErrors({}); }}
                 className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-white rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors cursor-pointer"
               >
@@ -405,11 +405,11 @@ export const LeavesPage: React.FC = () => {
             <form onSubmit={handleSubmit} className="p-5 space-y-4">
               {/* Leave Type Select */}
               <div className="space-y-1">
-                <label className="text-xs font-semibold text-gray-700 dark:text-slate-350">Leave Type</label>
+                <label className="text-xs font-semibold text-gray-700 dark:text-slate-500">Leave Type</label>
                 <select
                   value={leaveType}
                   onChange={(e) => setLeaveType(e.target.value as any)}
-                  className="w-full h-10 px-3 rounded-lg border bg-white dark:bg-slate-850 text-xs focus:ring-2 focus:ring-blue-500 border-gray-200 dark:border-slate-700 text-gray-900 dark:text-white"
+                  className="w-full h-10 px-3 rounded-lg border bg-white dark:bg-slate-500 text-xs focus:ring-2 focus:ring-blue-500 border-gray-200 dark:border-slate-700 text-gray-900 dark:text-white"
                 >
                   <option value="casual">Casual Leave</option>
                   <option value="sick">Sick Leave</option>
@@ -417,7 +417,7 @@ export const LeavesPage: React.FC = () => {
                 </select>
                 {activeBalance && (
                   <p className="text-[10px] text-gray-450 dark:text-slate-400">
-                    Remaining balance: <strong className="text-blue-500">{activeBalance.available} days</strong> (Used: {activeBalance.used}/{activeBalance.total})
+                    Remaining balance: <strong className="text-blue-500 dark:text-white">{activeBalance.available} days</strong> (Used: {activeBalance.used}/{activeBalance.total})
                   </p>
                 )}
               </div>
@@ -425,24 +425,24 @@ export const LeavesPage: React.FC = () => {
               {/* Date Pickers */}
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-1">
-                  <label className="text-xs font-semibold text-gray-700 dark:text-slate-350">Start Date</label>
+                  <label className="text-xs font-semibold text-gray-700 dark:text-slate-500">Start Date</label>
                   <input
                     type="date"
                     value={startDate}
                     onChange={(e) => setStartDate(e.target.value)}
-                    className="w-full h-10 px-3 rounded-lg border bg-white dark:bg-slate-850 text-xs focus:ring-2 focus:ring-blue-500 border-gray-200 dark:border-slate-700 text-gray-900 dark:text-white"
+                    className="w-full h-10 px-3 rounded-lg border bg-white dark:bg-slate-500 text-xs focus:ring-2 focus:ring-blue-500 border-gray-200 dark:border-slate-700 text-gray-900 dark:text-white"
                   />
                   {formErrors.startDate && (
                     <p className="text-[10px] text-red-500 font-medium">{formErrors.startDate}</p>
                   )}
                 </div>
                 <div className="space-y-1">
-                  <label className="text-xs font-semibold text-gray-700 dark:text-slate-350">End Date</label>
+                  <label className="text-xs font-semibold text-gray-700 dark:text-slate-500">End Date</label>
                   <input
                     type="date"
                     value={endDate}
                     onChange={(e) => setEndDate(e.target.value)}
-                    className="w-full h-10 px-3 rounded-lg border bg-white dark:bg-slate-850 text-xs focus:ring-2 focus:ring-blue-500 border-gray-200 dark:border-slate-700 text-gray-900 dark:text-white"
+                    className="w-full h-10 px-3 rounded-lg border bg-white dark:bg-slate-500 text-xs focus:ring-2 focus:ring-blue-500 border-gray-200 dark:border-slate-700 text-gray-900 dark:text-white"
                   />
                   {formErrors.endDate && (
                     <p className="text-[10px] text-red-500 font-medium">{formErrors.endDate}</p>
@@ -453,8 +453,8 @@ export const LeavesPage: React.FC = () => {
               {/* Total Requested Days Tracker */}
               {requestedDaysCount > 0 && (
                 <div className={`p-3 rounded-xl border flex items-center gap-2 text-xs font-semibold
-                  ${hasSufficientBalance 
-                    ? 'bg-blue-50/50 border-blue-200 text-blue-800 dark:bg-blue-900/10 dark:border-blue-800/30 dark:text-blue-300' 
+                  ${hasSufficientBalance
+                    ? 'bg-blue-50/50 border-blue-200 text-blue-800 dark:bg-blue-900/10 dark:border-blue-800/30 dark:text-blue-300'
                     : 'bg-red-50/50 border-red-200 text-red-800 dark:bg-red-950/15 dark:border-red-900/30 dark:text-red-300'
                   }`}
                 >
@@ -469,7 +469,7 @@ export const LeavesPage: React.FC = () => {
               {/* Reason Description */}
               <div className="space-y-1">
                 <div className="flex justify-between items-center">
-                  <label className="text-xs font-semibold text-gray-700 dark:text-slate-350">Reason</label>
+                  <label className="text-xs font-semibold text-gray-700 dark:text-slate-500">Reason</label>
                   <span className="text-[10px] text-gray-400">{reason.length}/500</span>
                 </div>
                 <textarea
@@ -477,7 +477,7 @@ export const LeavesPage: React.FC = () => {
                   onChange={(e) => setReason(e.target.value.slice(0, 500))}
                   placeholder="Provide details about your time off request..."
                   rows={4}
-                  className="w-full p-3 rounded-lg border bg-white dark:bg-slate-850 text-xs focus:ring-2 focus:ring-blue-500 border-gray-200 dark:border-slate-700 text-gray-900 dark:text-white resize-none"
+                  className="w-full p-3 rounded-lg border bg-white dark:bg-slate-500 text-xs focus:ring-2 focus:ring-blue-500 border-gray-200 dark:border-slate-700 text-gray-900 dark:text-white resize-none"
                 />
                 {formErrors.reason && (
                   <p className="text-[10px] text-red-500 font-medium">{formErrors.reason}</p>
@@ -489,7 +489,7 @@ export const LeavesPage: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => { setIsModalOpen(false); setFormErrors({}); }}
-                  className="px-4 py-2.5 rounded-lg border hover:bg-gray-50 border-gray-200 dark:border-slate-750 dark:hover:bg-slate-700 text-gray-600 dark:text-slate-350 font-semibold cursor-pointer"
+                  className="px-4 py-2.5 rounded-lg border hover:bg-gray-50 border-gray-200 dark:border-slate-750 dark:bg-slate-500 dark:hover:bg-slate-700 text-gray-600 dark:text-white font-semibold cursor-pointer"
                 >
                   Cancel
                 </button>

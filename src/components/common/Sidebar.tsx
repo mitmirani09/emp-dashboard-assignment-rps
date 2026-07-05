@@ -1,11 +1,11 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { 
-  LayoutDashboard, 
-  Clock, 
-  CalendarDays, 
-  Users, 
-  Megaphone, 
+import {
+  LayoutDashboard,
+  Clock,
+  CalendarDays,
+  Users,
+  Megaphone,
   User,
   Settings,
   ChevronLeft,
@@ -21,11 +21,11 @@ interface SidebarProps {
   onToggleCollapse: () => void;
 }
 
-export const Sidebar: React.FC<SidebarProps> = ({ 
-  isOpen, 
-  onClose, 
-  isCollapsed, 
-  onToggleCollapse 
+export const Sidebar: React.FC<SidebarProps> = ({
+  isOpen,
+  onClose,
+  isCollapsed,
+  onToggleCollapse
 }) => {
   const navItems = [
     { name: 'Dashboard', path: '/', icon: LayoutDashboard },
@@ -42,7 +42,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
     <>
       {/* Mobile Sidebar Backdrop */}
       {isOpen && (
-        <div 
+        <div
           onClick={onClose}
           className="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm md:hidden"
         />
@@ -61,9 +61,9 @@ export const Sidebar: React.FC<SidebarProps> = ({
         <div className="flex md:hidden justify-between items-center px-4 py-4 border-b border-gray-150 dark:border-slate-800">
           <div className="flex items-center gap-2">
             <span className="w-6 h-6 rounded-lg bg-blue-600 flex items-center justify-center text-white text-[11px] font-black font-mono">Co</span>
-            <span className="font-extrabold text-sm text-gray-900 dark:text-white">CoPortal</span>
+            <span className="font-extrabold text-sm text-gray-900 dark:text-white">RPSPortal</span>
           </div>
-          <button 
+          <button
             onClick={onClose}
             className="p-1 hover:bg-gray-100 dark:hover:bg-slate-800 text-gray-400 hover:text-gray-600 dark:hover:text-white rounded-lg transition-colors cursor-pointer"
             aria-label="Close sidebar"
@@ -82,8 +82,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
               onClick={onClose}
               className={({ isActive }) => `
                 flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 hover:scale-[1.01] group
-                ${isActive 
-                  ? 'bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400' 
+                ${isActive
+                  ? 'bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400'
                   : 'hover:bg-gray-50 text-gray-600 hover:text-gray-900 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white'
                 }
               `}

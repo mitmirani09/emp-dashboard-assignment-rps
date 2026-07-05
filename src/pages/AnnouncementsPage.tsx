@@ -1,8 +1,8 @@
 import React, { useState, useMemo } from 'react';
-import { 
-  Sparkles, 
-  Calendar, 
-  User, 
+import {
+  Sparkles,
+  Calendar,
+  User,
   Search,
   BookOpen,
   ArrowUpDown
@@ -96,11 +96,11 @@ export const AnnouncementsPage: React.FC = () => {
   const filteredAnnouncements = useMemo(() => {
     let result = announcements.filter(ann => {
       const matchCategory = selectedCategory === 'all' || ann.category === selectedCategory;
-      const matchSearch = 
+      const matchSearch =
         ann.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         ann.content.toLowerCase().includes(searchQuery.toLowerCase()) ||
         ann.author.toLowerCase().includes(searchQuery.toLowerCase());
-      
+
       return matchCategory && matchSearch;
     });
 
@@ -129,7 +129,7 @@ export const AnnouncementsPage: React.FC = () => {
       {/* Filters & search panel */}
       <div className="bg-white dark:bg-slate-800 p-4 rounded-2xl border border-gray-100 dark:border-slate-700 shadow-sm space-y-4">
         <div className="flex flex-col md:flex-row justify-between items-stretch md:items-center gap-4">
-          
+
           {/* Category Pill Buttons */}
           <div className="flex flex-wrap gap-2">
             {categories.map(cat => (
@@ -156,7 +156,7 @@ export const AnnouncementsPage: React.FC = () => {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search announcements..."
-                className="w-full sm:w-60 h-9 pl-9 pr-8 rounded-lg border bg-gray-50/50 dark:bg-slate-850 text-xs focus:ring-2 focus:ring-blue-500 border-gray-200 dark:border-slate-700 text-gray-900 dark:text-white"
+                className="w-full sm:w-60 h-9 pl-9 pr-8 rounded-lg border bg-gray-50/50 dark:bg-slate-500 text-xs focus:ring-2 focus:ring-blue-500 border-gray-200 dark:border-slate-700 text-gray-900 dark:text-white"
               />
             </div>
 
@@ -165,7 +165,7 @@ export const AnnouncementsPage: React.FC = () => {
               <select
                 value={sortOrder}
                 onChange={(e) => setSortOrder(e.target.value as any)}
-                className="w-full sm:w-36 h-9 px-3 pr-8 rounded-lg border bg-gray-50/50 dark:bg-slate-850 text-xs focus:ring-2 focus:ring-blue-500 border-gray-200 dark:border-slate-700 text-gray-900 dark:text-white appearance-none cursor-pointer"
+                className="w-full sm:w-36 h-9 px-3 pr-8 rounded-lg border bg-gray-50/50 dark:bg-slate-500 text-xs focus:ring-2 focus:ring-blue-500 border-gray-200 dark:border-slate-700 text-gray-900 dark:text-white appearance-none cursor-pointer"
               >
                 <option value="newest">Newest First</option>
                 <option value="oldest">Oldest First</option>
@@ -188,8 +188,8 @@ export const AnnouncementsPage: React.FC = () => {
 
 
           return (
-            <article 
-              key={ann.id} 
+            <article
+              key={ann.id}
               className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-100 dark:border-slate-700 overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col justify-between"
             >
               {/* Optional announcement image */}
@@ -219,7 +219,7 @@ export const AnnouncementsPage: React.FC = () => {
                     `}>
                       {ann.category}
                     </span>
-                    
+
                     <span className="flex items-center gap-1 font-mono">
                       <Calendar className="w-3.5 h-3.5 text-gray-400" />
                       {ann.createdAt}
@@ -230,7 +230,7 @@ export const AnnouncementsPage: React.FC = () => {
                     {ann.title}
                   </h3>
 
-                  <p className={`text-xs text-gray-650 dark:text-slate-350 leading-relaxed mt-3
+                  <p className={`text-xs text-gray-650 dark:text-slate-400 leading-relaxed mt-3
                     ${!isExpanded ? 'line-clamp-3' : ''}`}>
                     {ann.content}
                   </p>
@@ -238,7 +238,7 @@ export const AnnouncementsPage: React.FC = () => {
 
                 <div className="mt-4 pt-4 border-t border-gray-50 dark:border-slate-700/50">
                   <div className="flex flex-wrap items-center justify-between gap-3 text-xs">
-                    
+
                     {/* Author Signature */}
                     <div className="flex items-center gap-1.5 text-gray-400">
                       <User className="w-4 h-4 shrink-0" />
@@ -277,7 +277,7 @@ export const AnnouncementsPage: React.FC = () => {
                         <Sparkles className="w-3 h-3 text-blue-500 animate-pulse" />
                         <span>AI Summary Output</span>
                       </div>
-                      
+
                       {isSummaryLoading ? (
                         // Loading shimmer
                         <div className="space-y-1.5 py-1">

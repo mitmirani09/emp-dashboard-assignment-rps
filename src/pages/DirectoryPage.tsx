@@ -1,14 +1,14 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { 
-  Search, 
-  Grid, 
-  List, 
-  Mail, 
-  Phone, 
-  MapPin, 
-  X, 
-  Users, 
+import {
+  Search,
+  Grid,
+  List,
+  Mail,
+  Phone,
+  MapPin,
+  X,
+  Users,
   Filter,
   RefreshCw
 } from 'lucide-react';
@@ -47,12 +47,12 @@ export const DirectoryPage: React.FC = () => {
   // Main Filter Logic
   const filteredEmployees = useMemo(() => {
     return employees.filter(emp => {
-      const matchSearch = 
+      const matchSearch =
         emp.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
         emp.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
         emp.role.toLowerCase().includes(searchQuery.toLowerCase()) ||
         emp.department.toLowerCase().includes(searchQuery.toLowerCase());
-      
+
       const matchDept = selectedDept === 'All' || emp.department === selectedDept;
       const matchLoc = selectedLoc === 'All' || emp.location === selectedLoc;
 
@@ -82,7 +82,7 @@ export const DirectoryPage: React.FC = () => {
 
   return (
     <div className="space-y-6">
-      
+
       {/* 1. Page Header */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
@@ -102,7 +102,7 @@ export const DirectoryPage: React.FC = () => {
       {/* 2. Search & Filters Panel */}
       <div className="bg-white dark:bg-slate-800 p-4 rounded-2xl border border-gray-100 dark:border-slate-700 space-y-4 shadow-sm">
         <div className="flex flex-col md:flex-row gap-3">
-          
+
           {/* Search bar */}
           <div className="relative flex-1">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
@@ -111,7 +111,7 @@ export const DirectoryPage: React.FC = () => {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search coworkers by name, role, email, or department..."
-              className="w-full h-10 pl-9 pr-9 rounded-xl border bg-gray-50/50 dark:bg-slate-850 text-xs focus:ring-2 focus:ring-blue-500 border-gray-200 dark:border-slate-700 text-gray-900 dark:text-white"
+              className="w-full h-10 pl-9 pr-9 rounded-xl border bg-gray-50/50 dark:bg-slate-500 text-xs focus:ring-2 focus:ring-blue-500 border-gray-200 dark:border-slate-700 text-gray-900 dark:text-white"
             />
             {searchQuery && (
               <button
@@ -128,7 +128,7 @@ export const DirectoryPage: React.FC = () => {
             <select
               value={selectedDept}
               onChange={(e) => setSelectedDept(e.target.value)}
-              className="w-full h-10 px-3 pr-8 rounded-xl border bg-gray-50/50 dark:bg-slate-850 text-xs focus:ring-2 focus:ring-blue-500 border-gray-200 dark:border-slate-700 text-gray-900 dark:text-white appearance-none cursor-pointer"
+              className="w-full h-10 px-3 pr-8 rounded-xl border bg-gray-50/50 dark:bg-slate-500 text-xs focus:ring-2 focus:ring-blue-500 border-gray-200 dark:border-slate-700 text-gray-900 dark:text-white appearance-none cursor-pointer"
             >
               <option value="All">All Departments</option>
               {departments.filter(d => d !== 'All').map(d => (
@@ -145,7 +145,7 @@ export const DirectoryPage: React.FC = () => {
             <select
               value={selectedLoc}
               onChange={(e) => setSelectedLoc(e.target.value)}
-              className="w-full h-10 px-3 pr-8 rounded-xl border bg-gray-50/50 dark:bg-slate-850 text-xs focus:ring-2 focus:ring-blue-500 border-gray-200 dark:border-slate-700 text-gray-900 dark:text-white appearance-none cursor-pointer"
+              className="w-full h-10 px-3 pr-8 rounded-xl border bg-gray-50/50 dark:bg-slate-500 text-xs focus:ring-2 focus:ring-blue-500 border-gray-200 dark:border-slate-700 text-gray-900 dark:text-white appearance-none cursor-pointer"
             >
               <option value="All">All Locations</option>
               {locations.filter(l => l !== 'All').map(l => (
@@ -196,14 +196,14 @@ export const DirectoryPage: React.FC = () => {
         // Loading State: Shimmer Skeletons
         <div className={viewMode === 'grid' ? 'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6' : 'space-y-4'}>
           {Array.from({ length: 8 }).map((_, idx) => (
-            <div 
-              key={idx} 
+            <div
+              key={idx}
               className={`bg-white dark:bg-slate-800 rounded-2xl border border-gray-150 dark:border-slate-700 p-5 overflow-hidden
                 ${viewMode === 'grid' ? 'flex flex-col items-center text-center space-y-4' : 'flex items-center gap-4'}`}
             >
               {/* Avatar circle skeleton */}
               <div className="w-16 h-16 rounded-full animate-shimmer shrink-0" />
-              
+
               <div className="flex-1 w-full space-y-2">
                 {/* Name line */}
                 <div className="h-4 w-1/2 mx-auto sm:mx-0 animate-shimmer rounded" />
@@ -259,7 +259,7 @@ export const DirectoryPage: React.FC = () => {
                   {emp.name}
                 </h3>
                 <p className="text-[11px] text-gray-400 dark:text-slate-450 mt-0.5">{emp.role}</p>
-                
+
                 <span className={`inline-block text-[9px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded-full mt-3
                   ${getDeptColor(emp.department)}`}>
                   {emp.department}
@@ -268,16 +268,16 @@ export const DirectoryPage: React.FC = () => {
 
               {/* Action Contacts Footer */}
               <div className="w-full mt-6 pt-4 border-t border-gray-100 dark:border-slate-700/50 flex justify-center gap-4 text-gray-400 dark:text-slate-500 text-xs">
-                <a 
-                  href={`mailto:${emp.email}`} 
+                <a
+                  href={`mailto:${emp.email}`}
                   onClick={(e) => e.stopPropagation()}
                   className="p-2 hover:bg-blue-50 dark:hover:bg-blue-950/20 hover:text-blue-600 dark:hover:text-blue-400 rounded-lg transition-colors"
                   title={emp.email}
                 >
                   <Mail className="w-4.5 h-4.5" />
                 </a>
-                <a 
-                  href={`tel:${emp.phone}`} 
+                <a
+                  href={`tel:${emp.phone}`}
                   onClick={(e) => e.stopPropagation()}
                   className="p-2 hover:bg-emerald-50 dark:hover:bg-emerald-950/20 hover:text-emerald-600 dark:hover:text-emerald-400 rounded-lg transition-colors"
                   title={emp.phone}
@@ -299,7 +299,7 @@ export const DirectoryPage: React.FC = () => {
             <div
               key={emp.id}
               onClick={() => navigate(`/profile?id=${emp.id}`)}
-              className="p-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 hover:bg-gray-50/50 dark:hover:bg-slate-850/50 cursor-pointer transition-colors group"
+              className="p-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 hover:bg-gray-50/50 dark:hover:bg-slate-500/50 cursor-pointer transition-colors group"
             >
               <div className="flex items-center gap-3.5">
                 <img
@@ -321,7 +321,7 @@ export const DirectoryPage: React.FC = () => {
                   ${getDeptColor(emp.department)}`}>
                   {emp.department}
                 </span>
-                
+
                 <span className="font-mono">{emp.email}</span>
                 <span className="font-mono text-gray-400">{emp.phone}</span>
 

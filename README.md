@@ -1,6 +1,6 @@
 # 💻 Employee Dashboard & HR Intranet
 
-Welcome to **CoPortal**, a premium-grade Employee Dashboard and Internal HR Intranet built using **React 19, TypeScript, and Tailwind CSS v4**.
+Welcome to **RPSPortal**, a premium-grade Employee Dashboard and Internal HR Intranet built using **React 19, TypeScript, and Tailwind CSS v4**.
 
 This application provides employees with a responsive platform to track shifts, request time off, find coworker contact coordinates, read corporate announcements with AI summaries, and converse with a context-aware AI HR chatbot.
 

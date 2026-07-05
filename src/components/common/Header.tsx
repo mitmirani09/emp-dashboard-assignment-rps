@@ -44,7 +44,7 @@ export const Header: React.FC<HeaderProps> = ({ onToggleSidebar }) => {
     <header className="sticky top-0 z-40 w-full h-16 border-b transition-colors duration-300 backdrop-blur-md
       bg-white/80 border-gray-200 dark:bg-slate-900/80 dark:border-slate-800">
       <div className="flex items-center justify-between h-full px-4 md:px-6">
-        
+
         {/* Left Side: Hamburger & Brand */}
         <div className="flex items-center gap-3">
           <button
@@ -54,13 +54,13 @@ export const Header: React.FC<HeaderProps> = ({ onToggleSidebar }) => {
           >
             <Menu className="w-5 h-5" />
           </button>
-          
+
           <Link to="/" className="flex items-center gap-2 font-bold text-lg text-gray-900 dark:text-white hover:opacity-90">
             <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-tr from-blue-500 to-purple-600 text-white">
               <Sparkles className="w-4 h-4" />
             </div>
             <span className="hidden sm:inline bg-gradient-to-r from-blue-600 to-purple-500 bg-clip-text text-transparent dark:from-blue-400 dark:to-purple-300">
-              CoPortal
+              RPSPortal
             </span>
           </Link>
         </div>
@@ -99,7 +99,7 @@ export const Header: React.FC<HeaderProps> = ({ onToggleSidebar }) => {
                 </div>
                 <div className="max-h-64 overflow-y-auto divide-y divide-gray-150 dark:divide-slate-700">
                   {mockNotifications.map(notif => (
-                    <div key={notif.id} className={`p-3 transition-colors hover:bg-gray-50 dark:hover:bg-slate-750 ${notif.unread ? 'bg-blue-50/20 dark:bg-blue-900/10' : ''}`}>
+                    <div key={notif.id} className={`p-3 transition-colors hover:bg-gray-50 dark:hover:bg-slate-500 ${notif.unread ? 'bg-blue-50/20 dark:bg-blue-900/10' : ''}`}>
                       <div className="flex justify-between items-start gap-2 mb-1">
                         <span className={`text-xs font-semibold ${notif.unread ? 'text-gray-900 dark:text-white' : 'text-gray-600 dark:text-slate-300'}`}>
                           {notif.title}
@@ -154,7 +154,7 @@ export const Header: React.FC<HeaderProps> = ({ onToggleSidebar }) => {
                   <Settings className="w-4 h-4 opacity-50" />
                   Settings
                 </div>
-                
+
                 {/* Switch Profile Sub-menu */}
                 <div className="border-t border-gray-100 dark:border-slate-750 my-1"></div>
                 <div className="px-4 py-1.5 text-[9px] font-bold text-gray-400 dark:text-slate-500 uppercase tracking-wider">
@@ -169,13 +169,13 @@ export const Header: React.FC<HeaderProps> = ({ onToggleSidebar }) => {
                         setShowUserDropdown(false);
                       }}
                       className={`w-full flex items-center gap-2 px-2 py-1 rounded-lg text-left text-xs transition-colors cursor-pointer
-                        ${currentUser.id === emp.id 
-                          ? 'bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400 font-semibold' 
+                        ${currentUser.id === emp.id
+                          ? 'bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400 font-semibold'
                           : 'text-gray-700 dark:text-slate-200 hover:bg-gray-100 dark:hover:bg-slate-700'
                         }`}
                     >
-                      <img 
-                        src={emp.avatar || 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=24&h=24&fit=crop&q=80'} 
+                      <img
+                        src={emp.avatar || 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=24&h=24&fit=crop&q=80'}
                         alt={emp.name}
                         className="w-4.5 h-4.5 rounded-full object-cover shrink-0"
                       />

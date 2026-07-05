@@ -358,7 +358,7 @@ export const AttendancePage: React.FC = () => {
             </thead>
             <tbody className="divide-y divide-gray-150 dark:divide-slate-700 text-gray-700 dark:text-slate-300">
               {sortedRecords.map((record) => (
-                <tr key={record.date} className="hover:bg-gray-50/50 dark:hover:bg-slate-850/50 transition-colors">
+                <tr key={record.date} className="hover:bg-gray-50/50 dark:hover:bg-slate-500/50 transition-colors">
                   <td className="p-4 pl-6 font-semibold font-mono text-gray-900 dark:text-white">{record.date}</td>
                   <td className="p-4">{record.checkIn}</td>
                   <td className="p-4">{record.checkOut}</td>

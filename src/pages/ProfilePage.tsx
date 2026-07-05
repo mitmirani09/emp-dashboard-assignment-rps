@@ -1,14 +1,14 @@
 import React, { useState, useMemo } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
-import { 
-  User, 
-  Mail, 
-  Phone, 
-  MapPin, 
-  Calendar, 
-  ArrowLeft, 
-  Edit3, 
-  Check, 
+import {
+  User,
+  Mail,
+  Phone,
+  MapPin,
+  Calendar,
+  ArrowLeft,
+  Edit3,
+  Check,
   Copy,
   ChevronRight
 } from 'lucide-react';
@@ -137,12 +137,12 @@ export const ProfilePage: React.FC = () => {
 
       {/* 2. Main Page Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        
+
         {/* Left Column (Profile card & Contact detail) */}
         <div className="lg:col-span-2 space-y-6">
           {/* Main profile presentation */}
           <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-150 dark:border-slate-700 shadow-sm overflow-hidden p-6 relative">
-            
+
             {/* Action edit button (Only if own profile) */}
             {isOwnProfile && !isEditing && (
               <button
@@ -173,7 +173,7 @@ export const ProfilePage: React.FC = () => {
                       value={editAvatar}
                       onChange={(e) => setEditAvatar(e.target.value)}
                       placeholder="https://images.unsplash.com/photo-..."
-                      className="w-full h-9 px-3 rounded-lg border bg-gray-50 dark:bg-slate-850 text-xs focus:ring-2 focus:ring-blue-500 border-gray-200 dark:border-slate-700 text-gray-900 dark:text-white"
+                      className="w-full h-9 px-3 rounded-lg border bg-gray-50 dark:bg-slate-500 text-xs focus:ring-2 focus:ring-blue-500 border-gray-200 dark:border-slate-700 text-gray-900 dark:text-white"
                     />
                   </div>
                 </div>
@@ -185,7 +185,7 @@ export const ProfilePage: React.FC = () => {
                       type="text"
                       value={editName}
                       onChange={(e) => setEditName(e.target.value)}
-                      className="w-full h-9 px-3 rounded-lg border bg-white dark:bg-slate-850 text-xs focus:ring-2 focus:ring-blue-500 border-gray-200 dark:border-slate-700 text-gray-900 dark:text-white"
+                      className="w-full h-9 px-3 rounded-lg border bg-white dark:bg-slate-500 text-xs focus:ring-2 focus:ring-blue-500 border-gray-200 dark:border-slate-700 text-gray-900 dark:text-white"
                     />
                   </div>
                   <div className="space-y-1">
@@ -194,7 +194,7 @@ export const ProfilePage: React.FC = () => {
                       type="email"
                       value={editEmail}
                       onChange={(e) => setEditEmail(e.target.value)}
-                      className="w-full h-9 px-3 rounded-lg border bg-white dark:bg-slate-850 text-xs focus:ring-2 focus:ring-blue-500 border-gray-200 dark:border-slate-700 text-gray-900 dark:text-white"
+                      className="w-full h-9 px-3 rounded-lg border bg-white dark:bg-slate-500 text-xs focus:ring-2 focus:ring-blue-500 border-gray-200 dark:border-slate-700 text-gray-900 dark:text-white"
                     />
                   </div>
                   <div className="space-y-1">
@@ -203,7 +203,7 @@ export const ProfilePage: React.FC = () => {
                       type="text"
                       value={editPhone}
                       onChange={(e) => setEditPhone(e.target.value)}
-                      className="w-full h-9 px-3 rounded-lg border bg-white dark:bg-slate-850 text-xs focus:ring-2 focus:ring-blue-500 border-gray-200 dark:border-slate-700 text-gray-900 dark:text-white"
+                      className="w-full h-9 px-3 rounded-lg border bg-white dark:bg-slate-500 text-xs focus:ring-2 focus:ring-blue-500 border-gray-200 dark:border-slate-700 text-gray-900 dark:text-white"
                     />
                   </div>
                   <div className="space-y-1">
@@ -212,7 +212,7 @@ export const ProfilePage: React.FC = () => {
                       type="text"
                       value={editLocation}
                       onChange={(e) => setEditLocation(e.target.value)}
-                      className="w-full h-9 px-3 rounded-lg border bg-white dark:bg-slate-850 text-xs focus:ring-2 focus:ring-blue-500 border-gray-200 dark:border-slate-700 text-gray-900 dark:text-white"
+                      className="w-full h-9 px-3 rounded-lg border bg-white dark:bg-slate-500 text-xs focus:ring-2 focus:ring-blue-500 border-gray-200 dark:border-slate-700 text-gray-900 dark:text-white"
                     />
                   </div>
                 </div>
@@ -224,7 +224,7 @@ export const ProfilePage: React.FC = () => {
                     onChange={(e) => setEditBio(e.target.value)}
                     rows={4}
                     placeholder="Describe yourself, your interests, tech stack, etc..."
-                    className="w-full p-3 rounded-lg border bg-white dark:bg-slate-850 text-xs focus:ring-2 focus:ring-blue-500 border-gray-200 dark:border-slate-700 text-gray-900 dark:text-white resize-none"
+                    className="w-full p-3 rounded-lg border bg-white dark:bg-slate-500 text-xs focus:ring-2 focus:ring-blue-500 border-gray-200 dark:border-slate-700 text-gray-900 dark:text-white resize-none"
                   />
                 </div>
 
@@ -287,7 +287,7 @@ export const ProfilePage: React.FC = () => {
                 {/* About Bio Section */}
                 <div className="space-y-2">
                   <h3 className="text-xs font-bold uppercase tracking-wider text-gray-400">About</h3>
-                  <p className="text-xs text-gray-650 dark:text-slate-350 leading-relaxed">
+                  <p className="text-xs text-gray-650 dark:text-slate-300 leading-relaxed">
                     {targetEmployee.bio || 'This employee hasn\'t added a biography yet. Edit your profile to create one!'}
                   </p>
                 </div>
@@ -295,17 +295,17 @@ export const ProfilePage: React.FC = () => {
                 {/* Contact and Metadata stats grid */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 border-t border-gray-100 dark:border-slate-700/50 pt-5">
                   <div className="space-y-4">
-                    <div className="flex items-center justify-between p-3 rounded-xl bg-gray-50/50 dark:bg-slate-850 border border-gray-100/50 dark:border-slate-750/30">
+                    <div className="flex items-center justify-between p-3 rounded-xl bg-gray-50/50 dark:bg-slate-800/50 border border-gray-100/50 dark:border-slate-750/30">
                       <div className="flex items-center gap-2.5 min-w-0">
                         <Mail className="w-4 h-4 text-blue-500 shrink-0" />
                         <div className="min-w-0">
-                          <span className="block text-[10px] text-gray-400 font-semibold uppercase">Email</span>
+                          <span className="block text-[10px] text-gray-400 dark:text-white font-semibold uppercase">Email</span>
                           <span className="text-xs font-semibold text-gray-700 dark:text-slate-300 truncate block font-mono">
                             {targetEmployee.email}
                           </span>
                         </div>
                       </div>
-                      <button 
+                      <button
                         onClick={() => handleCopyText(targetEmployee.email, 'Email')}
                         className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-white cursor-pointer"
                       >
@@ -313,17 +313,17 @@ export const ProfilePage: React.FC = () => {
                       </button>
                     </div>
 
-                    <div className="flex items-center justify-between p-3 rounded-xl bg-gray-50/50 dark:bg-slate-850 border border-gray-100/50 dark:border-slate-750/30">
+                    <div className="flex items-center justify-between p-3 rounded-xl bg-gray-50/50 dark:bg-slate-800/50 border border-gray-100/50 dark:border-slate-750/30">
                       <div className="flex items-center gap-2.5 min-w-0">
                         <Phone className="w-4 h-4 text-emerald-500 shrink-0" />
                         <div className="min-w-0">
-                          <span className="block text-[10px] text-gray-400 font-semibold uppercase">Phone</span>
+                          <span className="block text-[10px] text-gray-400 font-semibold uppercase dark:text-white">Phone</span>
                           <span className="text-xs font-semibold text-gray-700 dark:text-slate-300 truncate block font-mono">
                             {targetEmployee.phone}
                           </span>
                         </div>
                       </div>
-                      <button 
+                      <button
                         onClick={() => handleCopyText(targetEmployee.phone, 'Phone')}
                         className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-white cursor-pointer"
                       >
@@ -333,20 +333,20 @@ export const ProfilePage: React.FC = () => {
                   </div>
 
                   <div className="space-y-4">
-                    <div className="flex items-center gap-2.5 p-3 rounded-xl bg-gray-50/50 dark:bg-slate-850 border border-gray-100/50 dark:border-slate-750/30">
+                    <div className="flex items-center gap-2.5 p-3 rounded-xl bg-gray-50/50 dark:bg-slate-800/50 border border-gray-100/50 dark:border-slate-750/30">
                       <MapPin className="w-4.5 h-4.5 text-purple-500 shrink-0" />
                       <div>
-                        <span className="block text-[10px] text-gray-400 font-semibold uppercase">Office Location</span>
+                        <span className="block text-[10px] text-gray-400 font-semibold uppercase dark:text-white">Office Location</span>
                         <span className="text-xs font-semibold text-gray-700 dark:text-slate-300">
                           {targetEmployee.location}
                         </span>
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-2.5 p-3 rounded-xl bg-gray-50/50 dark:bg-slate-850 border border-gray-100/50 dark:border-slate-750/30">
+                    <div className="flex items-center gap-2.5 p-3 rounded-xl bg-gray-50/50 dark:bg-slate-800/50 border border-gray-100/50 dark:border-slate-750/30">
                       <Calendar className="w-4.5 h-4.5 text-indigo-500 shrink-0" />
                       <div>
-                        <span className="block text-[10px] text-gray-400 font-semibold uppercase">Joined Date</span>
+                        <span className="block text-[10px] text-gray-400 font-semibold uppercase dark:text-white">Joined Date</span>
                         <span className="text-xs font-semibold text-gray-700 dark:text-slate-300 font-mono">
                           {targetEmployee.joinDate}
                         </span>
@@ -372,21 +372,21 @@ export const ProfilePage: React.FC = () => {
             {manager ? (
               <div className="space-y-2">
                 <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">Manager</span>
-                <div 
+                <div
                   onClick={() => navigate(`/profile?id=${manager.id}`)}
                   className="flex items-center justify-between p-3 rounded-xl border border-gray-100 dark:border-slate-700 hover:bg-gray-50 dark:hover:bg-slate-850 cursor-pointer transition-colors group"
                 >
                   <div className="flex items-center gap-2.5">
-                    <img 
-                      src={manager.avatar} 
-                      alt={manager.name} 
+                    <img
+                      src={manager.avatar}
+                      alt={manager.name}
                       className="w-10 h-10 rounded-full object-cover shrink-0"
                     />
                     <div>
                       <h4 className="text-xs font-bold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                         {manager.name}
                       </h4>
-                      <p className="text-[10px] text-gray-450 dark:text-slate-450">{manager.role}</p>
+                      <p className="text-[10px] text-gray-450 dark:text-slate-400">{manager.role}</p>
                     </div>
                   </div>
                   <ChevronRight className="w-4 h-4 opacity-50" />
@@ -404,15 +404,15 @@ export const ProfilePage: React.FC = () => {
                 <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">Team Peers ({peers.length})</span>
                 <div className="max-h-52 overflow-y-auto divide-y divide-gray-100 dark:divide-slate-700 pr-1">
                   {peers.map(peer => (
-                    <div 
+                    <div
                       key={peer.id}
                       onClick={() => navigate(`/profile?id=${peer.id}`)}
-                      className="flex items-center justify-between py-2.5 first:pt-0 last:pb-0 hover:bg-gray-50/50 dark:hover:bg-slate-850/50 cursor-pointer group"
+                      className="flex items-center justify-between px-2 rounded  py-2.5  hover:bg-gray-50/50 dark:hover:bg-slate-500/50 cursor-pointer group"
                     >
                       <div className="flex items-center gap-2.5">
-                        <img 
-                          src={peer.avatar} 
-                          alt={peer.name} 
+                        <img
+                          src={peer.avatar}
+                          alt={peer.name}
                           className="w-8 h-8 rounded-full object-cover shrink-0"
                         />
                         <div>
@@ -435,15 +435,15 @@ export const ProfilePage: React.FC = () => {
                 <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">Direct Reports ({directReports.length})</span>
                 <div className="max-h-44 overflow-y-auto divide-y divide-gray-100 dark:divide-slate-700 pr-1">
                   {directReports.map(report => (
-                    <div 
+                    <div
                       key={report.id}
                       onClick={() => navigate(`/profile?id=${report.id}`)}
                       className="flex items-center justify-between py-2.5 first:pt-0 last:pb-0 hover:bg-gray-50/50 dark:hover:bg-slate-850/50 cursor-pointer group"
                     >
                       <div className="flex items-center gap-2.5">
-                        <img 
-                          src={report.avatar} 
-                          alt={report.name} 
+                        <img
+                          src={report.avatar}
+                          alt={report.name}
                           className="w-8 h-8 rounded-full object-cover shrink-0"
                         />
                         <div>

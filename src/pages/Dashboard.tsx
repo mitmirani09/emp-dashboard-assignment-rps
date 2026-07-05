@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { 
-  Play, 
-  Square, 
-  Calendar, 
-  Clock, 
-  CheckCircle, 
-  AlertCircle, 
-  XCircle, 
-  ChevronRight, 
+import {
+  Play,
+  Square,
+  Calendar,
+  Clock,
+  CheckCircle,
+  AlertCircle,
+  XCircle,
+  ChevronRight,
   ArrowUpRight,
   Plus,
   Sparkles,
@@ -18,16 +18,16 @@ import { useEmployee } from '../context/EmployeeContext';
 
 export const Dashboard: React.FC = () => {
   const navigate = useNavigate();
-  const { 
-    currentUser, 
-    attendanceRecords, 
-    leaveBalances, 
+  const {
+    currentUser,
+    attendanceRecords,
+    leaveBalances,
     leaveRequests,
     announcements,
-    isPunchedIn, 
-    activePunchInTime, 
-    punchIn, 
-    punchOut 
+    isPunchedIn,
+    activePunchInTime,
+    punchIn,
+    punchOut
   } = useEmployee();
 
   const [currentTime, setCurrentTime] = useState(new Date());
@@ -88,8 +88,8 @@ export const Dashboard: React.FC = () => {
           <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white">
             Welcome back, {currentUser.name.split(' ')[0]} 👋
           </h1>
-          <p className="text-sm text-gray-500 dark:text-slate-450 mt-1">
-            You are logged in as <strong className="text-gray-700 dark:text-slate-350">{currentUser.role}</strong>
+          <p className="text-sm text-gray-500 dark:text-slate-500 mt-1">
+            You are logged in as <strong className="text-gray-700 dark:text-white">{currentUser.role}</strong>
           </p>
         </div>
         <div className="flex items-center gap-3 bg-white dark:bg-slate-800 shadow-sm border border-gray-100 dark:border-slate-700 px-4 py-2.5 rounded-xl">
@@ -107,10 +107,10 @@ export const Dashboard: React.FC = () => {
 
       {/* 2. Main Grid Layout */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        
+
         {/* Left/Center Column (2/3 width on large screens) */}
         <div className="lg:col-span-2 space-y-6">
-          
+
           {/* Row 1: Attendance Punch & Summary Cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             {/* Attendance Status Hero Card */}
@@ -119,7 +119,7 @@ export const Dashboard: React.FC = () => {
               <div className="absolute right-0 bottom-0 transform translate-x-8 translate-y-8 opacity-10 group-hover:scale-110 transition-transform duration-500">
                 <Clock className="w-48 h-48" />
               </div>
-              
+
               <div>
                 <div className="flex justify-between items-center mb-4">
                   <span className="text-xs font-semibold uppercase tracking-wider text-blue-100">
@@ -146,7 +146,7 @@ export const Dashboard: React.FC = () => {
                     {isPunchedIn ? elapsedTimeStr : todayRecord ? 'Shift Logged' : '00h 00m 00s'}
                   </h3>
                   <p className="text-xs text-blue-100/80">
-                    {isPunchedIn 
+                    {isPunchedIn
                       ? `Checked in at ${new Date(activePunchInTime!).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}`
                       : todayRecord
                         ? `Logged ${todayRecord.duration} hrs worked today`
@@ -170,8 +170,8 @@ export const Dashboard: React.FC = () => {
                     onClick={punchIn}
                     disabled={!!todayRecord}
                     className={`w-full flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-semibold text-sm transition-all cursor-pointer shadow-lg
-                      ${todayRecord 
-                        ? 'bg-white/15 text-white/50 cursor-not-allowed shadow-none' 
+                      ${todayRecord
+                        ? 'bg-white/15 text-white/50 cursor-not-allowed shadow-none'
                         : 'bg-white text-blue-700 hover:bg-blue-50 hover:scale-[1.02] active:scale-98 shadow-blue-900/20'
                       }`}
                   >
@@ -234,7 +234,7 @@ export const Dashboard: React.FC = () => {
                 <Megaphone className="w-5 h-5 text-purple-500" />
                 <h2 className="font-bold text-lg text-gray-900 dark:text-white">Announcements</h2>
               </div>
-              <button 
+              <button
                 onClick={() => navigate('/announcements')}
                 className="text-xs text-blue-600 dark:text-blue-400 font-semibold hover:underline flex items-center gap-0.5 cursor-pointer"
               >
@@ -272,7 +272,7 @@ export const Dashboard: React.FC = () => {
 
         {/* Right Side Column (1/3 width on large screens) */}
         <div className="space-y-6">
-          
+
           {/* Leaves Summary Panel */}
           <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-100 dark:border-slate-700 p-6 space-y-6">
             <div className="flex justify-between items-center">
@@ -288,18 +288,18 @@ export const Dashboard: React.FC = () => {
             <div className="space-y-4">
               {leaveBalances.map((bal) => {
                 const percent = Math.round((bal.used / bal.total) * 100);
-                const barColor = 
+                const barColor =
                   bal.type === 'casual' ? 'bg-blue-500' :
-                  bal.type === 'sick' ? 'bg-emerald-500' : 'bg-purple-500';
+                    bal.type === 'sick' ? 'bg-emerald-500' : 'bg-purple-500';
 
                 return (
                   <div key={bal.type} className="space-y-1.5">
-                    <div className="flex justify-between text-xs font-semibold text-gray-700 dark:text-slate-350">
+                    <div className="flex justify-between text-xs font-semibold text-gray-700 dark:text-slate-500">
                       <span className="capitalize">{bal.type} Leave</span>
                       <span>{bal.used}/{bal.total} used</span>
                     </div>
                     <div className="w-full h-2 bg-gray-100 dark:bg-slate-700 rounded-full overflow-hidden">
-                      <div 
+                      <div
                         className={`h-full rounded-full transition-all duration-500 ${barColor}`}
                         style={{ width: `${percent}%` }}
                       />
@@ -343,14 +343,14 @@ export const Dashboard: React.FC = () => {
               Explore your corporate portal. Search for teammates, read detailed announcements, check leaves, or chat with our HR assistant bot below.
             </p>
             <div className="grid grid-cols-2 gap-2 pt-2">
-              <button 
+              <button
                 onClick={() => navigate('/directory')}
                 className="flex items-center justify-between p-3 rounded-xl bg-white/5 hover:bg-white/10 text-left transition-colors cursor-pointer group"
               >
                 <span className="text-xs font-semibold text-slate-200">Directory</span>
                 <ArrowUpRight className="w-3.5 h-3.5 opacity-60 group-hover:opacity-100 transition-opacity" />
               </button>
-              <button 
+              <button
                 onClick={() => navigate('/profile')}
                 className="flex items-center justify-between p-3 rounded-xl bg-white/5 hover:bg-white/10 text-left transition-colors cursor-pointer group"
               >
