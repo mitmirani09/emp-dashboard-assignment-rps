@@ -1,20 +1,20 @@
 import React, { useState, useMemo } from 'react';
-import { 
-  BarChart, 
-  Bar, 
-  XAxis, 
-  YAxis, 
-  CartesianGrid, 
-  Tooltip, 
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
   ResponsiveContainer,
   Cell
 } from 'recharts';
-import { 
-  CheckCircle, 
-  AlertTriangle, 
-  XCircle, 
-  ChevronLeft, 
-  ChevronRight, 
+import {
+  CheckCircle,
+  AlertTriangle,
+  XCircle,
+  ChevronLeft,
+  ChevronRight,
   ArrowUpDown,
   Clock
 } from 'lucide-react';
@@ -23,7 +23,7 @@ import { useEmployee } from '../context/EmployeeContext';
 
 export const AttendancePage: React.FC = () => {
   const { attendanceRecords } = useEmployee();
-  
+
   // States
   const [selectedMonth, setSelectedMonth] = useState(6); // July (0-indexed base, so June = 5, July = 6)
   const [selectedYear, setSelectedYear] = useState(2026);
@@ -97,9 +97,9 @@ export const AttendancePage: React.FC = () => {
   const heatmapDays = useMemo(() => {
     const daysInMonth = new Date(selectedYear, selectedMonth + 1, 0).getDate();
     const firstDayIndex = new Date(selectedYear, selectedMonth, 1).getDay(); // Sunday = 0
-    
+
     const days = [];
-    
+
     // Add empty padding slots for preceding month days
     for (let i = 0; i < firstDayIndex; i++) {
       days.push({ dayNum: null, status: 'empty', dateStr: '' });
@@ -109,7 +109,7 @@ export const AttendancePage: React.FC = () => {
     for (let day = 1; day <= daysInMonth; day++) {
       const dateStr = `${selectedYear}-${(selectedMonth + 1).toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
       const record = attendanceRecords.find(r => r.date === dateStr);
-      
+
       const checkDayOfWeek = new Date(selectedYear, selectedMonth, day).getDay();
       const isWeekend = checkDayOfWeek === 0 || checkDayOfWeek === 6;
 
@@ -156,20 +156,20 @@ export const AttendancePage: React.FC = () => {
 
         {/* Date Month Selector */}
         <div className="flex items-center gap-2 bg-white dark:bg-slate-800 border border-gray-100 dark:border-slate-700 px-3 py-1.5 rounded-xl shadow-sm">
-          <button 
+          <button
             onClick={handlePrevMonth}
             className="p-1 hover:bg-gray-100 dark:hover:bg-slate-700 rounded-md cursor-pointer transition-colors"
           >
-            <ChevronLeft className="w-4 h-4" />
+            <ChevronLeft className="w-4 h-4 dark:text-slate-500 dark:hover:text-white" />
           </button>
           <span className="text-xs font-semibold text-gray-700 dark:text-slate-200 min-w-[100px] text-center">
             {monthsList[selectedMonth]} {selectedYear}
           </span>
-          <button 
+          <button
             onClick={handleNextMonth}
             className="p-1 hover:bg-gray-100 dark:hover:bg-slate-700 rounded-md cursor-pointer transition-colors"
           >
-            <ChevronRight className="w-4 h-4" />
+            <ChevronRight className="w-4 h-4 dark:text-slate-500 dark:hover:text-white" />
           </button>
         </div>
       </div>
@@ -236,7 +236,7 @@ export const AttendancePage: React.FC = () => {
                 <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e5e7eb" className="dark:stroke-slate-750" />
                 <XAxis dataKey="name" stroke="#94a3b8" fontSize={11} tickLine={false} />
                 <YAxis domain={[0, 25]} stroke="#94a3b8" fontSize={11} tickLine={false} />
-                <Tooltip 
+                <Tooltip
                   cursor={{ fill: 'rgba(59, 130, 246, 0.05)' }}
                   contentStyle={{
                     backgroundColor: 'rgba(15, 23, 42, 0.95)',
@@ -245,12 +245,15 @@ export const AttendancePage: React.FC = () => {
                     color: '#fff',
                     fontSize: '12px'
                   }}
+                  itemStyle={{
+                    color: '#64748b'
+                  }}
                 />
                 <Bar dataKey="days" radius={[4, 4, 0, 0]}>
                   {chartData.map((_, index) => (
-                    <Cell 
-                      key={`cell-${index}`} 
-                      fill={index === chartData.length - 1 ? '#8b5cf6' : '#3b82f6'} 
+                    <Cell
+                      key={`cell-${index}`}
+                      fill={index === chartData.length - 1 ? '#8b5cf6' : '#3b82f6'}
                     />
                   ))}
                 </Bar>
@@ -271,7 +274,7 @@ export const AttendancePage: React.FC = () => {
             {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map(d => (
               <span key={d} className="text-[10px] font-bold text-gray-450 dark:text-slate-500 py-1">{d}</span>
             ))}
-            
+
             {heatmapDays.map((day, idx) => {
               if (day.dayNum === null) {
                 return <div key={`empty-${idx}`} className="aspect-square" />;
@@ -290,7 +293,7 @@ export const AttendancePage: React.FC = () => {
                     ${tileColor}`}
                 >
                   <span>{day.dayNum}</span>
-                  
+
                   {/* Tooltip on Hover */}
                   {day.status !== 'weekend' && day.status !== 'unlogged' && day.record && (
                     <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-1.5 hidden group-hover:block bg-slate-950 text-white text-[10px] py-1.5 px-2 rounded-lg shadow-xl z-55 whitespace-nowrap">
@@ -345,7 +348,7 @@ export const AttendancePage: React.FC = () => {
         <div className="hidden md:block overflow-x-auto">
           <table className="w-full text-left border-collapse text-xs">
             <thead>
-              <tr className="border-b border-gray-200 dark:border-slate-700 text-gray-400 bg-gray-50/50 dark:bg-slate-850/50 font-bold uppercase tracking-wider">
+              <tr className="border-b border-gray-200 dark:border-slate-700 text-gray-400 bg-gray-50/50 dark:bg-slate-500/75 dark:text-white font-bold uppercase tracking-wider">
                 <th className="p-4 pl-6">Date</th>
                 <th className="p-4">Check-in Time</th>
                 <th className="p-4">Check-out Time</th>
