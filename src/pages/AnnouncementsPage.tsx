@@ -9,6 +9,8 @@ import {
 } from 'lucide-react';
 import { useEmployee } from '../context/EmployeeContext';
 import type { Announcement } from '../types';
+import { generateSummaryFromGemini } from '../utils/gemini';
+
 
 
 
@@ -53,7 +55,7 @@ export const AnnouncementsPage: React.FC = () => {
     return ann.content.split('.').slice(0, 2).join('.') + '.';
   };
 
-  const handleToggleSummary = (id: string, ann: Announcement) => {
+  const handleToggleSummary = async (id: string, ann: Announcement) => {
     // If summary is already open, just collapse it
     if (visibleSummaries[id]) {
       setVisibleSummaries(prev => ({ ...prev, [id]: false }));
@@ -65,15 +67,30 @@ export const AnnouncementsPage: React.FC = () => {
       setLoadingSummaries(prev => ({ ...prev, [id]: true }));
       setVisibleSummaries(prev => ({ ...prev, [id]: true }));
 
-      // Simulate AI latency check
-      setTimeout(() => {
-        setAiSummaries(prev => ({ ...prev, [id]: getAISummary(ann) }));
-        setLoadingSummaries(prev => ({ ...prev, [id]: false }));
-      }, 1000);
+      const hasGeminiKey = !!import.meta.env.VITE_GEMINI_API_KEY;
+
+      if (hasGeminiKey) {
+        try {
+          const summary = await generateSummaryFromGemini(ann.title, ann.content);
+          setAiSummaries(prev => ({ ...prev, [id]: summary }));
+        } catch (error) {
+          console.warn("Failed to generate summary using Gemini API, falling back to mock summary.", error);
+          setAiSummaries(prev => ({ ...prev, [id]: getAISummary(ann) }));
+        } finally {
+          setLoadingSummaries(prev => ({ ...prev, [id]: false }));
+        }
+      } else {
+        // Simulate AI latency check for fallback
+        setTimeout(() => {
+          setAiSummaries(prev => ({ ...prev, [id]: getAISummary(ann) }));
+          setLoadingSummaries(prev => ({ ...prev, [id]: false }));
+        }, 1000);
+      }
     } else {
       setVisibleSummaries(prev => ({ ...prev, [id]: true }));
     }
   };
+
 
   // Search & Filter computation
   const filteredAnnouncements = useMemo(() => {

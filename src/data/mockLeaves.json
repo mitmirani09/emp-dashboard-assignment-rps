@@ -1,12 +1,41 @@
 {
   "balances": [
-    { "type": "casual", "total": 12, "used": 7, "available": 5 },
-    { "type": "sick", "total": 10, "used": 2, "available": 8 },
-    { "type": "earned", "total": 20, "used": 8, "available": 12 }
+    { "employeeId": "emp-1", "type": "casual", "total": 12, "used": 7, "available": 5 },
+    { "employeeId": "emp-1", "type": "sick", "total": 10, "used": 2, "available": 8 },
+    { "employeeId": "emp-1", "type": "earned", "total": 20, "used": 8, "available": 12 },
+    
+    { "employeeId": "emp-2", "type": "casual", "total": 12, "used": 4, "available": 8 },
+    { "employeeId": "emp-2", "type": "sick", "total": 10, "used": 1, "available": 9 },
+    { "employeeId": "emp-2", "type": "earned", "total": 20, "used": 10, "available": 10 },
+    
+    { "employeeId": "emp-3", "type": "casual", "total": 12, "used": 6, "available": 6 },
+    { "employeeId": "emp-3", "type": "sick", "total": 10, "used": 3, "available": 7 },
+    { "employeeId": "emp-3", "type": "earned", "total": 20, "used": 5, "available": 15 },
+    
+    { "employeeId": "emp-4", "type": "casual", "total": 12, "used": 5, "available": 7 },
+    { "employeeId": "emp-4", "type": "sick", "total": 10, "used": 0, "available": 10 },
+    { "employeeId": "emp-4", "type": "earned", "total": 20, "used": 12, "available": 8 },
+    
+    { "employeeId": "emp-5", "type": "casual", "total": 12, "used": 2, "available": 10 },
+    { "employeeId": "emp-5", "type": "sick", "total": 10, "used": 2, "available": 8 },
+    { "employeeId": "emp-5", "type": "earned", "total": 20, "used": 4, "available": 16 },
+    
+    { "employeeId": "emp-6", "type": "casual", "total": 12, "used": 8, "available": 4 },
+    { "employeeId": "emp-6", "type": "sick", "total": 10, "used": 4, "available": 6 },
+    { "employeeId": "emp-6", "type": "earned", "total": 20, "used": 15, "available": 5 },
+    
+    { "employeeId": "emp-7", "type": "casual", "total": 12, "used": 3, "available": 9 },
+    { "employeeId": "emp-7", "type": "sick", "total": 10, "used": 1, "available": 9 },
+    { "employeeId": "emp-7", "type": "earned", "total": 20, "used": 2, "available": 18 },
+    
+    { "employeeId": "emp-8", "type": "casual", "total": 12, "used": 1, "available": 11 },
+    { "employeeId": "emp-8", "type": "sick", "total": 10, "used": 0, "available": 10 },
+    { "employeeId": "emp-8", "type": "earned", "total": 20, "used": 6, "available": 14 }
   ],
   "requests": [
     {
       "id": "req-1",
+      "employeeId": "emp-1",
       "startDate": "2026-04-10",
       "endDate": "2026-04-12",
       "leaveType": "casual",
@@ -18,6 +47,7 @@
     },
     {
       "id": "req-2",
+      "employeeId": "emp-1",
       "startDate": "2026-05-02",
       "endDate": "2026-05-02",
       "leaveType": "sick",
@@ -29,6 +59,7 @@
     },
     {
       "id": "req-3",
+      "employeeId": "emp-1",
       "startDate": "2026-06-15",
       "endDate": "2026-06-22",
       "leaveType": "earned",
@@ -40,12 +71,54 @@
     },
     {
       "id": "req-4",
+      "employeeId": "emp-1",
       "startDate": "2026-07-20",
       "endDate": "2026-07-24",
       "leaveType": "casual",
       "reason": "Personal errands and family event.",
       "status": "pending",
       "createdAt": "2026-07-02"
+    },
+    
+    {
+      "id": "req-5",
+      "employeeId": "emp-2",
+      "startDate": "2026-05-10",
+      "endDate": "2026-05-14",
+      "leaveType": "earned",
+      "reason": "Family spring break trip.",
+      "status": "approved",
+      "createdAt": "2026-04-20"
+    },
+    {
+      "id": "req-6",
+      "employeeId": "emp-3",
+      "startDate": "2026-06-02",
+      "endDate": "2026-06-04",
+      "leaveType": "casual",
+      "reason": "Attending graphic design conference.",
+      "status": "approved",
+      "createdAt": "2026-05-20"
+    },
+    {
+      "id": "req-7",
+      "employeeId": "emp-4",
+      "startDate": "2026-06-10",
+      "endDate": "2026-06-12",
+      "leaveType": "earned",
+      "reason": "Offsite HR planning week.",
+      "status": "approved",
+      "createdAt": "2026-06-01"
+    },
+    {
+      "id": "req-8",
+      "employeeId": "emp-5",
+      "startDate": "2026-07-15",
+      "endDate": "2026-07-16",
+      "leaveType": "casual",
+      "reason": "Moving into a new apartment.",
+      "status": "pending",
+      "createdAt": "2026-07-01"
     }
   ]
 }

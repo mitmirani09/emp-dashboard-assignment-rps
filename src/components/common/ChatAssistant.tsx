@@ -9,23 +9,28 @@ import {
 } from 'lucide-react';
 import { useEmployee } from '../../context/EmployeeContext';
 import type { Message } from '../../types';
-
+import { generateChatResponseFromGemini } from '../../utils/gemini';
 
 export const ChatAssistant: React.FC = () => {
   const { currentUser, leaveBalances, attendanceRecords } = useEmployee();
   const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      id: 'welcome',
-      text: `Hi ${currentUser.name.split(' ')[0]}! 👋 I am your virtual HR Assistant. Ask me anything about leaves, check-ins, or company policies!`,
-      sender: 'bot',
-      createdAt: new Date().toISOString()
-    }
-  ]);
+  const [messages, setMessages] = useState<Message[]>([]);
   const [inputVal, setInputVal] = useState('');
   const [isTyping, setIsTyping] = useState(false);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  // Reset chat welcome message when active profile changes
+  useEffect(() => {
+    setMessages([
+      {
+        id: 'welcome',
+        text: `Hi ${currentUser.name.split(' ')[0]}! 👋 I am your virtual HR Assistant. Ask me anything about leaves, check-ins, or company policies!`,
+        sender: 'bot',
+        createdAt: new Date().toISOString()
+      }
+    ]);
+  }, [currentUser.id]);
 
   // Auto-scroll to bottom of messages
   useEffect(() => {
@@ -39,7 +44,7 @@ export const ChatAssistant: React.FC = () => {
     'How do I punch in?'
   ];
 
-  // Match keyword answers
+  // Match keyword answers (Local Fallback Engine)
   const generateBotResponse = (text: string): string => {
     const query = text.toLowerCase();
 
@@ -85,7 +90,7 @@ export const ChatAssistant: React.FC = () => {
 Alternatively, contact HR Operations at **hr@company.com**.`;
   };
 
-  const handleSendMessage = (messageText: string) => {
+  const handleSendMessage = async (messageText: string) => {
     if (!messageText.trim()) return;
 
     // User Message
@@ -96,21 +101,74 @@ Alternatively, contact HR Operations at **hr@company.com**.`;
       createdAt: new Date().toISOString()
     };
 
+    // Prepend user message immediately to the view
     setMessages(prev => [...prev, userMsg]);
     setInputVal('');
     setIsTyping(true);
 
-    // Bot Typing simulated delay
-    setTimeout(() => {
-      const botMsg: Message = {
-        id: `msg-${Date.now()}-bot`,
-        text: generateBotResponse(messageText),
-        sender: 'bot',
-        createdAt: new Date().toISOString()
-      };
-      setMessages(prev => [...prev, botMsg]);
-      setIsTyping(false);
-    }, 1000);
+    const hasGeminiKey = !!import.meta.env.VITE_GEMINI_API_KEY;
+
+    if (hasGeminiKey) {
+      try {
+        // Compile context strings dynamically based on switched profile
+        const balancesStr = leaveBalances
+          .map(b => `- ${b.type.toUpperCase()}: total ${b.total}, used ${b.used}, available ${b.available}`)
+          .join('\n');
+        
+        const attendanceStr = attendanceRecords
+          .slice(0, 5)
+          .map(r => `- ${r.date}: status ${r.status} (Punch: ${r.checkIn} to ${r.checkOut}, worked ${r.duration} hours)`)
+          .join('\n');
+
+        const context = {
+          userName: currentUser.name,
+          userRole: currentUser.role,
+          userDepartment: currentUser.department,
+          managerName: currentUser.reportingTo || 'None',
+          leaveBalances: balancesStr || 'No leaves on file.',
+          recentAttendance: attendanceStr || 'No check-in history found.'
+        };
+
+        // Format history for Gemini call (exclude current userMsg since it is passed separately)
+        const chatHistory = messages
+          .filter(m => m.id !== 'welcome')
+          .map(m => ({ sender: m.sender, text: m.text }));
+
+        const botReply = await generateChatResponseFromGemini(messageText, chatHistory, context);
+
+        const botMsg: Message = {
+          id: `msg-${Date.now()}-bot`,
+          text: botReply,
+          sender: 'bot',
+          createdAt: new Date().toISOString()
+        };
+        setMessages(prev => [...prev, botMsg]);
+      } catch (error) {
+        console.warn("Failed to generate chat response using Gemini API, falling back to mock reply.", error);
+        
+        const botMsg: Message = {
+          id: `msg-${Date.now()}-bot`,
+          text: generateBotResponse(messageText),
+          sender: 'bot',
+          createdAt: new Date().toISOString()
+        };
+        setMessages(prev => [...prev, botMsg]);
+      } finally {
+        setIsTyping(false);
+      }
+    } else {
+      // Simulate typing delay for fallback mock engine
+      setTimeout(() => {
+        const botMsg: Message = {
+          id: `msg-${Date.now()}-bot`,
+          text: generateBotResponse(messageText),
+          sender: 'bot',
+          createdAt: new Date().toISOString()
+        };
+        setMessages(prev => [...prev, botMsg]);
+        setIsTyping(false);
+      }, 1000);
+    }
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -118,6 +176,7 @@ Alternatively, contact HR Operations at **hr@company.com**.`;
       handleSendMessage(inputVal);
     }
   };
+
 
   return (
     <div className="fixed bottom-6 right-6 z-40 flex flex-col items-end">

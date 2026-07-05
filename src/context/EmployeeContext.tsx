@@ -1,4 +1,5 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, useMemo } from 'react';
+
 import type { Employee, AttendanceRecord, LeaveBalance, LeaveRequest, Announcement } from '../types';
 
 import mockEmployees from '../data/mockEmployees.json';
@@ -19,6 +20,7 @@ interface EmployeeContextType {
   punchOut: () => void;
   submitLeaveRequest: (req: { startDate: string; endDate: string; leaveType: 'casual' | 'sick' | 'earned'; reason: string }) => boolean;
   updateProfile: (profile: Partial<Employee>) => void;
+  switchUser: (employeeId: string) => void;
 }
 
 const EmployeeContext = createContext<EmployeeContextType | undefined>(undefined);
@@ -137,6 +139,7 @@ export const EmployeeProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     }
 
     const newRecord: AttendanceRecord = {
+      employeeId: currentUser.id,
       date: dateStr,
       checkIn: checkInTime,
       checkOut: checkOutTime,
@@ -146,8 +149,9 @@ export const EmployeeProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 
     // Prepend new record, avoiding duplicates for the same day (replaces today's if punched out again)
     setAttendanceRecords(prev => {
-      const filtered = prev.filter(r => r.date !== dateStr);
-      return [newRecord, ...filtered];
+      const filtered = prev.filter(r => r.employeeId === currentUser.id && r.date !== dateStr);
+      const otherEmps = prev.filter(r => r.employeeId !== currentUser.id);
+      return [newRecord, ...filtered, ...otherEmps];
     });
 
     setIsPunchedIn(false);
@@ -167,8 +171,8 @@ export const EmployeeProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     const diffTime = Math.abs(end.getTime() - start.getTime());
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1;
 
-    // Check balance
-    const balanceIndex = leaveBalances.findIndex(b => b.type === req.leaveType);
+    // Check balance matching active user
+    const balanceIndex = leaveBalances.findIndex(b => b.employeeId === currentUser.id && b.type === req.leaveType);
     if (balanceIndex === -1) return false;
     const balance = leaveBalances[balanceIndex];
 
@@ -188,6 +192,7 @@ export const EmployeeProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     // Add to leave requests list
     const newRequest: LeaveRequest = {
       id: `req-${Date.now()}`,
+      employeeId: currentUser.id,
       startDate: req.startDate,
       endDate: req.endDate,
       leaveType: req.leaveType,
@@ -208,23 +213,48 @@ export const EmployeeProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     setEmployees(prev => prev.map(emp => emp.id === currentUser.id ? updatedUser : emp));
   };
 
+  // 8. Switch profile action
+  const switchUser = (employeeId: string) => {
+    const found = employees.find(e => e.id === employeeId);
+    if (found) {
+      setCurrentUser(found);
+      setIsPunchedIn(false);
+      setActivePunchInTime(null);
+    }
+  };
+
+  // Expose filtered subsets for the current user to prevent layout clashes when switching
+  const userAttendanceRecords = useMemo(() => {
+    return attendanceRecords.filter(r => r.employeeId === currentUser.id);
+  }, [attendanceRecords, currentUser.id]);
+
+  const userLeaveBalances = useMemo(() => {
+    return leaveBalances.filter(b => b.employeeId === currentUser.id);
+  }, [leaveBalances, currentUser.id]);
+
+  const userLeaveRequests = useMemo(() => {
+    return leaveRequests.filter(r => r.employeeId === currentUser.id);
+  }, [leaveRequests, currentUser.id]);
+
   return (
     <EmployeeContext.Provider value={{
       employees,
       currentUser,
-      attendanceRecords,
-      leaveBalances,
-      leaveRequests,
+      attendanceRecords: userAttendanceRecords,
+      leaveBalances: userLeaveBalances,
+      leaveRequests: userLeaveRequests,
       announcements,
       isPunchedIn,
       activePunchInTime,
       punchIn,
       punchOut,
       submitLeaveRequest,
-      updateProfile
+      updateProfile,
+      switchUser
     }}>
       {children}
     </EmployeeContext.Provider>
+
   );
 };
 

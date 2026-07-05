@@ -13,6 +13,7 @@ export interface Employee {
 }
 
 export interface AttendanceRecord {
+  employeeId: string;
   date: string;           // "YYYY-MM-DD"
   checkIn: string;        // "HH:MM AM/PM" or "-"
   checkOut: string;       // "HH:MM AM/PM" or "-"
@@ -21,6 +22,7 @@ export interface AttendanceRecord {
 }
 
 export interface LeaveBalance {
+  employeeId: string;
   type: 'casual' | 'sick' | 'earned';
   total: number;
   used: number;
@@ -29,6 +31,7 @@ export interface LeaveBalance {
 
 export interface LeaveRequest {
   id: string;
+  employeeId: string;
   startDate: string;      // "YYYY-MM-DD"
   endDate: string;        // "YYYY-MM-DD"
   leaveType: 'casual' | 'sick' | 'earned';
@@ -38,6 +41,7 @@ export interface LeaveRequest {
   approvedAt?: string;
   approverComment?: string;
 }
+
 
 export interface Announcement {
   id: string;

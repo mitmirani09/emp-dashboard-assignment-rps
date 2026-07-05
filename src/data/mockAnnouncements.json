@@ -36,5 +36,60 @@
     "author": "Robert Chen (CEO)",
     "createdAt": "2026-06-25",
     "importance": "high"
+  },
+  {
+    "id": "ann-5",
+    "title": "New Health & Wellness Benefit Coverage Upgrades",
+    "content": "We have successfully renegotiated our employee medical plans for the upcoming year, resulting in premium benefits additions without any cost increases to staff. Coverage now includes a $300 annual mental health wellness stipend, free virtual consultations for physical therapy, and a 20% discount at major fitness networks. Wellness claims can be uploaded directly through the insurance provider portal starting next Monday. Detailed benefits brochures are available for download under the resources folder.",
+    "category": "hr",
+    "author": "Bob Williams (HR Manager)",
+    "createdAt": "2026-06-20",
+    "importance": "medium"
+  },
+  {
+    "id": "ann-6",
+    "title": "Server Migration Alert: Internal Tooling Scheduled Downtime",
+    "content": "Our DevOps team will be migrating several core code hosting repositories and staging servers to new cloud clusters. As a result, internal staging databases, build tools, and local credentials management pipelines will experience temporary outages on Saturday, July 11th from 01:00 AM to 06:00 AM EST. Please check in any active branches before Friday evening and contact Frank Wilson if you have any critical deployment dependencies that require custom scheduling.",
+    "category": "policy",
+    "author": "Frank Wilson (DevOps Lead)",
+    "createdAt": "2026-06-18",
+    "importance": "medium"
+  },
+  {
+    "id": "ann-7",
+    "title": "Tech Talk: Building Accessible User Interfaces with WCAG 2.2",
+    "content": "Join Alice Johnson and David Miller this Thursday at 3:00 PM EST for a lunch-and-learn seminar covering the newly published WCAG 2.2 accessibility standard guidelines. They will discuss semantic HTML tree structures, keyboard focus navigation highlights, contrast optimizations in dark mode, and tools for checking screen reader tags. Food vouchers will be emailed to all remote participants who register before Tuesday afternoon.",
+    "category": "event",
+    "author": "David Miller (Frontend Engineer)",
+    "createdAt": "2026-06-15",
+    "imageUrl": "https://images.unsplash.com/photo-1542744094-3a31f103e35f?auto=format&fit=crop&w=800&q=80",
+    "importance": "low"
+  },
+  {
+    "id": "ann-8",
+    "title": "Information Security Awareness Training Due",
+    "content": "Our annual Information Security compliance check is now active. All workers are required to review the updated security guidelines module and complete the quiz before June 30th. The module covers corporate phishing strategies, public Wi-Fi safety precautions, password manager hygiene, and local device encryption requirements. Failure to complete the training will result in restricted access to our repository tools.",
+    "category": "policy",
+    "author": "Security Operations Team",
+    "createdAt": "2026-06-10",
+    "importance": "high"
+  },
+  {
+    "id": "ann-9",
+    "title": "Company-wide Hackathon Ideation Session",
+    "content": "To prepare for our upcoming annual Summer Hackathon, we are hosting a collaborative brainstorming session on Slack channel #hackathon-q3. Come share raw concepts, pitches, look for teammates, and ask for technical advice. Ideas can cover AI productivity integrations, green computing initiatives, or developer experience tools. Session starts tomorrow morning at 11:00 AM EST. See you there!",
+    "category": "event",
+    "author": "Alice Johnson (Social Committee)",
+    "createdAt": "2026-06-05",
+    "importance": "low"
+  },
+  {
+    "id": "ann-10",
+    "title": "Celebrating Q2 Performance Milestones and Growth Updates",
+    "content": "Thanks to the outstanding efforts of our engineering and customer relations teams, we have crossed our Q2 growth targets, onboarding 50+ new enterprise clients! Our system responsiveness metrics have improved by 15%, and search index query times have been halved. To celebrate this milestone, the company is hosting happy hour socials at our NY and Austin hubs this Friday evening at 5:00 PM local time. Remote workers can redeem happy hour food and beverage vouchers via Slack.",
+    "category": "company",
+    "author": "Robert Chen (CEO)",
+    "createdAt": "2026-06-01",
+    "importance": "medium"
   }
 ]

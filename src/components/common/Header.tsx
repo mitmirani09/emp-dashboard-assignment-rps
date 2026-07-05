@@ -9,8 +9,9 @@ interface HeaderProps {
 }
 
 export const Header: React.FC<HeaderProps> = ({ onToggleSidebar }) => {
-  const { currentUser } = useEmployee();
+  const { currentUser, employees, switchUser } = useEmployee();
   const [showNotifications, setShowNotifications] = useState(false);
+
 
   const [showUserDropdown, setShowUserDropdown] = useState(false);
 
@@ -153,6 +154,36 @@ export const Header: React.FC<HeaderProps> = ({ onToggleSidebar }) => {
                   <Settings className="w-4 h-4 opacity-50" />
                   Settings
                 </div>
+                
+                {/* Switch Profile Sub-menu */}
+                <div className="border-t border-gray-100 dark:border-slate-750 my-1"></div>
+                <div className="px-4 py-1.5 text-[9px] font-bold text-gray-400 dark:text-slate-500 uppercase tracking-wider">
+                  Switch Profile
+                </div>
+                <div className="max-h-36 overflow-y-auto px-2 pb-2 space-y-1">
+                  {employees.map(emp => (
+                    <button
+                      key={emp.id}
+                      onClick={() => {
+                        switchUser(emp.id);
+                        setShowUserDropdown(false);
+                      }}
+                      className={`w-full flex items-center gap-2 px-2 py-1 rounded-lg text-left text-xs transition-colors cursor-pointer
+                        ${currentUser.id === emp.id 
+                          ? 'bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400 font-semibold' 
+                          : 'text-gray-700 dark:text-slate-200 hover:bg-gray-100 dark:hover:bg-slate-700'
+                        }`}
+                    >
+                      <img 
+                        src={emp.avatar || 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=24&h=24&fit=crop&q=80'} 
+                        alt={emp.name}
+                        className="w-4.5 h-4.5 rounded-full object-cover shrink-0"
+                      />
+                      <span className="truncate">{emp.name.split(' ')[0]} ({emp.department})</span>
+                    </button>
+                  ))}
+                </div>
+
                 <div className="border-t border-gray-100 dark:border-slate-750 my-1"></div>
                 <button
                   onClick={() => {
@@ -165,6 +196,7 @@ export const Header: React.FC<HeaderProps> = ({ onToggleSidebar }) => {
                   Logout
                 </button>
               </div>
+
             )}
           </div>
 
