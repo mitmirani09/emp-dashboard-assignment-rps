@@ -61,7 +61,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
         <div className="flex md:hidden justify-between items-center px-4 py-4 border-b border-gray-150 dark:border-slate-800">
           <div className="flex items-center gap-2">
             <span className="w-6 h-6 rounded-lg bg-blue-600 flex items-center justify-center text-white text-[11px] font-black font-mono">Co</span>
-            <span className="font-extrabold text-sm text-gray-900 dark:text-white">RPSPortal</span>
+            <span className="font-extrabold text-sm text-gray-900 dark:text-white">TeamPulse</span>
           </div>
           <button
             onClick={onClose}

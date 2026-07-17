@@ -60,7 +60,7 @@ export const Header: React.FC<HeaderProps> = ({ onToggleSidebar }) => {
               <Sparkles className="w-4 h-4" />
             </div>
             <span className="hidden sm:inline bg-gradient-to-r from-blue-600 to-purple-500 bg-clip-text text-transparent dark:from-blue-400 dark:to-purple-300">
-              RPSPortal
+              TeamPulse
             </span>
           </Link>
         </div>
